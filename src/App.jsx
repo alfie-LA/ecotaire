@@ -13,6 +13,14 @@ const App = () => {
 
   const [animatedScore, setAnimatedScore] = useState(0);
 
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
+
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(() => {
+  return parseInt(localStorage.getItem('highScore')) || 0;
+  });
+
+
   useEffect(() => {
     if (animatedScore === gameState.score) return;
 
@@ -85,6 +93,11 @@ const App = () => {
         score += 100;
       }
 
+      if (score > highScore) {
+        setHighScore(score);
+        localStorage.setItem('highScore', score.toString());
+      }
+      
       const discardPile = prev.discardPile.filter((c) => c.id !== card.id);
 
       const columns = prev.columns.map((col) => {
@@ -187,7 +200,7 @@ const App = () => {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat"
+      className="min-h-screen bg-cover bg-center bg-no-repeat overflow-x-hidden overflow-y-auto max-h-screen"
       style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}
     >
       <div className="w-full max-w-[1300px] mx-auto px-4 bg-white/30 rounded-xl shadow-lg py-6">
@@ -199,7 +212,11 @@ const App = () => {
           Moves: {gameState.moves}
         </div>
 
-        <div className="flex justify-center mb-6">
+        <div className="text-center mb-4 text-1xl sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+         🏆 High Score: {highScore}
+        </div>
+
+        <div className="flex justify-center items-center flex-wrap gap-2 mb-6 px-2">
           <Deck
             drawPile={gameState.drawPile}
             discardPile={gameState.discardPile.slice(-3)}
@@ -208,7 +225,7 @@ const App = () => {
           />
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-items-center w-full max-w-[720px] mx-auto mb-8">
+        <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 px-2 justify-items-center w-full max-w-[420px] sm:max-w-[720px] mx-auto mb-8">
           {gameState.columns.map((columnCards, index) => (
             <Column
               key={index}
@@ -219,10 +236,18 @@ const App = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-items-center w-full max-w-[720px] mx-auto mb-8">
+        <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 px-2 justify-items-center w-full max-w-[420px] sm:max-w-[720px] mx-auto mb-8">
           {gameState.ecoZones.map((zone, index) => (
             <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
           ))}
+        </div>
+        <div className="text-center mt-4">
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            onClick={() => setShowHowToPlay(true)}
+          >
+          📘 How to Play
+          </button>
         </div>
 
         <div className="text-center mt-8">
@@ -234,6 +259,26 @@ const App = () => {
           </button>
         </div>
       </div>
+      {showHowToPlay && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white rounded-lg p-6 max-w-md w-full shadow-lg relative">
+      <h2 className="text-xl font-bold mb-4 text-green-700">🌱 How to Play Eco-Solitaire</h2>
+      <ul className="list-disc ml-5 space-y-2 text-sm text-gray-800">
+        <li>Sort species into the correct Eco-Zone by class (Mammals, Birds, etc.).</li>
+        <li>Cards must be placed in order from rank 1 (Least Concern) to 10 (Critically Endangered).</li>
+        <li>Use the draw and discard piles to cycle through available cards.</li>
+        <li>Click a card to automatically move it to a valid column or zone.</li>
+        <li>Restore all 5 zones to win!</li>
+      </ul>
+      <button
+        onClick={() => setShowHowToPlay(false)}
+        className="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-lg"
+      >
+        ✖
+      </button>
+    </div>
+  </div>
+)}
     </div>
   );
 };
