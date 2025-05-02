@@ -24,7 +24,7 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
       {/* Draw Pile */}
       <div
         onClick={onDrawCard}
-        className="relative w-8 sm:w-16 md:w-20 h-12 sm:h-24 md:h-28 cursor-pointer flex flex-col items-center justify-center bg-white/40 backdrop-blur-md border border-gray-400 rounded shadow-md hover:ring-2 hover:ring-green-400 transition"
+        className="relative w-6 sm:w-16 md:w-20 h-9 sm:h-24 md:h-28 cursor-pointer flex flex-col items-center justify-center bg-white/30 backdrop-blur-md border-0 sm:border sm:border-gray-400 rounded-sm sm:rounded shadow-sm sm:shadow-md hover:ring-1 sm:hover:ring-2 hover:ring-green-400 transition"
         title={showRecycle ? 'Recycle' : drawPile.length > 0 ? 'Click to draw' : ''}
       >
         {showRecycle ? (
@@ -52,13 +52,13 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
       </div>
 
       {/* Discard Pile — shows up to 3 stacked cards */}
-      <div className="relative w-8 sm:w-16 md:w-20 h-12 sm:h-24 md:h-28">
+      <div className="relative w-6 sm:w-16 md:w-20 h-9 sm:h-24 md:h-28">
         {visibleDiscards.map((card, idx) => (
           <div
             key={card.id}
             ref={idx === visibleDiscards.length - 1 ? drag : null}
             className={`absolute top-0 left-0 z-[${idx}]`}
-            style={{ marginLeft: `${idx * -15}px` }}
+            style={{ marginLeft: `${idx * -10}px` }}
           >
             <Card
               card={card}

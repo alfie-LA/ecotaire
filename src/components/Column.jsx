@@ -18,18 +18,18 @@ const Column = ({ cards, columnIndex, onCardDrop, onCardClick, shakeCardId }) =>
   return (
     <div
       ref={drop}
-      className={`w-8 sm:w-16 md:w-24 min-h-[100px] sm:min-h-[250px] md:min-h-[350px] overflow-hidden border border-dashed border-gray-300 
-        rounded p-1 flex flex-col items-center transition duration-200 
-        backdrop-blur-md bg-white/30 shadow-md ${isOver ? 'ring-2 ring-green-400' : ''}`}
-      style={{ outline: '1px dashed blue' }}
+      className={`w-6 sm:w-16 md:w-24 min-h-[70px] sm:min-h-[250px] md:min-h-[350px] overflow-hidden border-0 sm:border sm:border-dashed sm:border-gray-300 
+        rounded-sm sm:rounded p-0 sm:p-1 flex flex-col items-center transition duration-200 
+        backdrop-blur-md bg-white/20 sm:bg-white/30 shadow-sm sm:shadow-md ${isOver ? 'ring-1 sm:ring-2 ring-green-400' : ''}`}
+      style={{ outline: '0 sm:1px dashed transparent sm:blue' }}
     >
       {cards.length === 0 ? (
-        <div className="text-gray-300 mt-12 sm:mt-24 text-xs sm:text-sm">Empty</div>
+        <div className="text-gray-300 mt-5 sm:mt-24 text-[8px] sm:text-sm">-</div>
       ) : (
         cards.map((card, i) => (
           <div
              key={card.id}
-             className={`relative ${card.faceUp ? 'mb-[-35px] sm:mb-[-20px]' : 'mb-[-35px] sm:mb-[-20px]'}`}
+             className={`relative ${card.faceUp ? 'mb-[-40px] sm:mb-[-20px]' : 'mb-[-40px] sm:mb-[-20px]'}`}
               style={{ zIndex: i }}
           >
           <Card

@@ -254,7 +254,7 @@ const App = () => {
         {/* Main content area - optimized for landscape on small screens */}
         <div className={`flex-1 flex ${windowOrientation === 'landscape' ? 'flex-row' : 'flex-col'} gap-0 sm:gap-4 justify-center h-full`}>
           {/* Left section - Draw/Discard pile */}
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center mr-1 sm:mr-0">
             <Deck
               drawPile={gameState.drawPile}
               discardPile={gameState.discardPile.slice(-3)}
@@ -264,21 +264,22 @@ const App = () => {
           </div>
 
           {/* Right section for game columns and eco zones */}
-          <div className="flex-1 flex flex-col justify-between h-full py-0">
+          <div className="flex-1 flex flex-col justify-between h-full py-0 pl-0 sm:pl-0">
             {/* Columns */}
-            <div className="grid grid-cols-5 gap-0 sm:gap-1 justify-items-center w-full">
+            <div className="grid grid-cols-5 gap-0 justify-items-center w-full -mx-1 sm:mx-0">
               {gameState.columns.map((columnCards, index) => (
                 <Column
                   key={index}
+                  columnIndex={index}
                   cards={columnCards}
-                  onDropCard={(card) => handleDropToColumn(card, index)}
+                  onCardDrop={(card) => handleDropToColumn(card, index)}
                   onCardClick={handleCardClick}
                 />
               ))}
             </div>
 
             {/* EcoZones */}
-            <div className="grid grid-cols-5 gap-0 sm:gap-1 justify-items-center w-full mt-0 sm:mt-4">
+            <div className="grid grid-cols-5 gap-0 justify-items-center w-full -mx-1 sm:mx-0 mt-0 sm:mt-4">
               {gameState.ecoZones.map((zone, index) => (
                 <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
               ))}
