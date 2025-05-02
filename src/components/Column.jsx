@@ -18,18 +18,18 @@ const Column = ({ cards, columnIndex, onCardDrop, onCardClick, shakeCardId }) =>
   return (
     <div
       ref={drop}
-      className={`w-16 sm:w-20 md:w-24 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] overflow-hidden border border-dashed border-gray-300 
+      className={`w-12 sm:w-16 md:w-24 min-h-[180px] sm:min-h-[250px] md:min-h-[350px] overflow-hidden border border-dashed border-gray-300 
         rounded p-1 flex flex-col items-center transition duration-200 
         backdrop-blur-md bg-white/30 shadow-md ${isOver ? 'ring-2 ring-green-400' : ''}`}
       style={{ outline: '1px dashed blue' }}
     >
       {cards.length === 0 ? (
-        <div className="text-gray-300 mt-24 text-sm">Empty</div>
+        <div className="text-gray-300 mt-12 sm:mt-24 text-xs sm:text-sm">Empty</div>
       ) : (
         cards.map((card, i) => (
           <div
              key={card.id}
-             className={`relative ${card.faceUp ? 'mb-[-20px]' : 'mb-[-20px]'}`}
+             className={`relative ${card.faceUp ? 'mb-[-30px] sm:mb-[-20px]' : 'mb-[-30px] sm:mb-[-20px]'}`}
               style={{ zIndex: i }}
           >
           <Card

@@ -200,45 +200,45 @@ const App = () => {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat overflow-x-auto max-h-screen"
+      className="h-[100svh] bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}
     >
-      <div className="w-full max-w-[1300px] mx-auto px-2 sm:px-4 bg-white/30 rounded-xl shadow-lg py-4 sm:py-6">
+      <div className="h-full w-full max-w-[1300px] mx-auto px-1 sm:px-4 bg-white/30 rounded-xl shadow-lg py-2 sm:py-6 flex flex-col">
 
-        {/* Score section - always remains at top */}
-        <div className="grid grid-cols-3 items-center mb-4">
+        {/* Score section - compact for mobile */}
+        <div className="grid grid-cols-3 items-center mb-1 sm:mb-4">
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]">
+            <div className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]">
               {animatedScore}
             </div>
-            <div className="text-xs sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+            <div className="text-[10px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
               Score
             </div>
           </div>
           
           <div className="text-center">
-            <div className="text-xl sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+            <div className="text-lg sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
               🏆 {highScore}
             </div>
-            <div className="text-xs sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+            <div className="text-[10px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
               High Score
             </div>
           </div>
           
           <div className="text-center">
-            <div className="text-xl sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+            <div className="text-lg sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
               {gameState.moves}
             </div>
-            <div className="text-xs sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+            <div className="text-[10px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
               Moves
             </div>
           </div>
         </div>
 
-        {/* Responsive layout for landscape orientation */}
-        <div className="flex flex-col md:flex-row gap-4 justify-center">
-          {/* Left section - Draw/Discard pile in landscape, top in portrait */}
-          <div className="flex justify-center items-center mb-4 md:mb-0">
+        {/* Main content area - fills available space */}
+        <div className="flex-1 flex flex-col landscape:flex-row gap-1 sm:gap-4 justify-center">
+          {/* Left section - Draw/Discard pile */}
+          <div className="flex justify-center items-start landscape:items-center">
             <Deck
               drawPile={gameState.drawPile}
               discardPile={gameState.discardPile.slice(-3)}
@@ -248,9 +248,9 @@ const App = () => {
           </div>
 
           {/* Right section for game columns and eco zones */}
-          <div className="flex-1 overflow-x-auto">
+          <div className="flex-1 flex flex-col justify-between">
             {/* Columns */}
-            <div className="grid grid-cols-5 auto-cols-min gap-1 px-1 justify-items-center w-full overflow-x-auto">
+            <div className="grid grid-cols-5 gap-[2px] sm:gap-1 justify-items-center w-full">
               {gameState.columns.map((columnCards, index) => (
                 <Column
                   key={index}
@@ -262,7 +262,7 @@ const App = () => {
             </div>
 
             {/* EcoZones */}
-            <div className="grid grid-cols-5 auto-cols-min gap-1 px-1 justify-items-center w-full mt-4 overflow-x-auto">
+            <div className="grid grid-cols-5 gap-[2px] sm:gap-1 justify-items-center w-full mt-1 sm:mt-4">
               {gameState.ecoZones.map((zone, index) => (
                 <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
               ))}
@@ -270,17 +270,17 @@ const App = () => {
           </div>
         </div>
         
-        {/* Game controls - now side by side in a flex container */}
-        <div className="flex justify-center space-x-4 mt-4">
+        {/* Game controls - bottom buttons */}
+        <div className="flex justify-center space-x-2 sm:space-x-4 mt-1 sm:mt-4">
           <button
-            className="bg-blue-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded text-sm sm:text-base hover:bg-blue-600"
+            className="bg-blue-500 text-white px-2 py-[2px] sm:px-4 sm:py-2 rounded text-xs sm:text-base hover:bg-blue-600"
             onClick={() => setShowHowToPlay(true)}
           >
             📘 How to Play
           </button>
           
           <button
-            className="bg-green-600 text-white px-3 py-1 sm:px-4 sm:py-2 rounded text-sm sm:text-base hover:bg-green-700"
+            className="bg-green-600 text-white px-2 py-[2px] sm:px-4 sm:py-2 rounded text-xs sm:text-base hover:bg-green-700"
             onClick={handleNewGame}
           >
             🔄 New Game
