@@ -266,7 +266,7 @@ const App = () => {
           {/* Right section for game columns and eco zones */}
           <div className="flex-1 flex flex-col justify-between h-full py-0 pl-0 sm:pl-0">
             {/* Columns */}
-            <div className="grid grid-cols-5 gap-0 justify-items-center w-full -mx-1 sm:mx-0">
+            <div className="grid grid-cols-5 gap-0 justify-items-center w-full -mx-2 sm:mx-0">
               {gameState.columns.map((columnCards, index) => (
                 <Column
                   key={index}
@@ -279,7 +279,7 @@ const App = () => {
             </div>
 
             {/* EcoZones */}
-            <div className="grid grid-cols-5 gap-0 justify-items-center w-full -mx-1 sm:mx-0 mt-0 sm:mt-4">
+            <div className="grid grid-cols-5 gap-0 justify-items-center w-full -mx-2 sm:mx-0 mt-0 sm:mt-4">
               {gameState.ecoZones.map((zone, index) => (
                 <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
               ))}

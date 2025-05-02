@@ -57,14 +57,14 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
     <div
       ref={isTop ? drag : null}
       onClick={handleClick}
-      className={`w-6 h-9 sm:w-16 md:w-20 sm:h-24 md:h-28 rounded-sm sm:rounded shadow-sm sm:shadow-md mb-[-40px] sm:mb-[-60px] z-10 relative border-[0.5px] sm:border-2 ${border} ${
+      className={`w-4 h-7 sm:w-16 md:w-20 sm:h-24 md:h-28 rounded-none sm:rounded shadow-none sm:shadow-md mb-[-40px] sm:mb-[-60px] z-10 relative border-0 sm:border-2 ${border} ${
         card.faceUp ? `${bg} text-black` : 'bg-gray-700'
       } ${isDragging ? 'opacity-50' : ''} cursor-pointer ${shakeCardId === card.id ? 'animate-shake' : ''}`}
     >
       {card.faceUp ? (
         <div className="w-full h-full p-0 sm:p-1 relative flex flex-col justify-between">
           {/* Top-left rank */}
-          <div className="absolute top-0 left-0 text-[7px] sm:text-xs md:text-base font-bold">
+          <div className="absolute top-0 left-0 text-[6px] sm:text-xs md:text-base font-bold">
             {card.rank}
           </div>
 
@@ -73,7 +73,7 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
             <img
               src={iconSrc}
               alt={card.class}
-              className="w-3 h-3 sm:w-8 sm:h-8 md:w-13 md:h-13 object-contain"
+              className="w-2 h-2 sm:w-8 sm:h-8 md:w-13 md:h-13 object-contain"
               loading="lazy"
             />
           </div>

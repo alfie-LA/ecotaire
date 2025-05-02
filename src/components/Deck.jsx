@@ -24,23 +24,23 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
       {/* Draw Pile */}
       <div
         onClick={onDrawCard}
-        className="relative w-6 sm:w-16 md:w-20 h-9 sm:h-24 md:h-28 cursor-pointer flex flex-col items-center justify-center bg-white/30 backdrop-blur-md border-0 sm:border sm:border-gray-400 rounded-sm sm:rounded shadow-sm sm:shadow-md hover:ring-1 sm:hover:ring-2 hover:ring-green-400 transition"
+        className="relative w-4 sm:w-16 md:w-20 h-7 sm:h-24 md:h-28 cursor-pointer flex flex-col items-center justify-center bg-white/30 backdrop-blur-md border-0 sm:border sm:border-gray-400 rounded-none sm:rounded shadow-none sm:shadow-md hover:ring-0 sm:hover:ring-2 hover:ring-green-400 transition"
         title={showRecycle ? 'Recycle' : drawPile.length > 0 ? 'Click to draw' : ''}
       >
         {showRecycle ? (
           <div className="flex flex-col items-center justify-center">
-            <div className="text-[8px] sm:text-sm font-semibold text-green-700 mb-0 sm:mb-1">Recycle</div>
-            <div className="text-sm sm:text-2xl animate-pulse">♻️</div>
+            <div className="text-[6px] sm:text-sm font-semibold text-green-700 mb-0 sm:mb-1">↻</div>
+            <div className="text-[10px] sm:text-2xl animate-pulse">♻️</div>
           </div>
         ) : isEmpty ? (
-          <div className="text-gray-300 text-[8px] sm:text-sm">Empty</div>
+          <div className="text-gray-300 text-[6px] sm:text-sm">-</div>
         ) : (
           <div className="flex flex-col items-center justify-center">
-            <div className="text-[8px] sm:text-sm font-semibold text-gray-800 mb-0 sm:mb-1">Draw</div>
+            <div className="text-[6px] sm:text-sm font-semibold text-gray-800 mb-0 sm:mb-1">↓</div>
             <img
               src="/assets/icons/draw-pile.png"
               alt="Draw pile"
-              className="w-5 h-5 sm:w-8 sm:h-8 object-contain"
+              className="w-2 h-2 sm:w-8 sm:h-8 object-contain"
               loading="lazy"
               onError={(e) => {
                 e.target.onerror = null;
@@ -52,13 +52,13 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
       </div>
 
       {/* Discard Pile — shows up to 3 stacked cards */}
-      <div className="relative w-6 sm:w-16 md:w-20 h-9 sm:h-24 md:h-28">
+      <div className="relative w-4 sm:w-16 md:w-20 h-7 sm:h-24 md:h-28">
         {visibleDiscards.map((card, idx) => (
           <div
             key={card.id}
             ref={idx === visibleDiscards.length - 1 ? drag : null}
             className={`absolute top-0 left-0 z-[${idx}]`}
-            style={{ marginLeft: `${idx * -10}px` }}
+            style={{ marginLeft: `${idx * -8}px` }}
           >
             <Card
               card={card}
