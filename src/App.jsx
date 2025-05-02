@@ -200,59 +200,87 @@ const App = () => {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat overflow-x-hidden overflow-y-auto max-h-screen"
+      className="min-h-screen bg-cover bg-center bg-no-repeat overflow-x-auto max-h-screen"
       style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}
     >
-      <div className="w-full max-w-[1300px] mx-auto px-4 bg-white/30 rounded-xl shadow-lg py-6">
+      <div className="w-full max-w-[1300px] mx-auto px-2 sm:px-4 bg-white/30 rounded-xl shadow-lg py-4 sm:py-6">
 
-        <div className="text-center text-5xl sm:text-5xl font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] ">
-          Score: {animatedScore}
-        </div>
-        <div className="text-center mb-4 text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
-          Moves: {gameState.moves}
+        {/* Score section - always remains at top */}
+        <div className="grid grid-cols-3 items-center mb-4">
+          <div className="text-center">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]">
+              {animatedScore}
+            </div>
+            <div className="text-xs sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+              Score
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <div className="text-xl sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+              🏆 {highScore}
+            </div>
+            <div className="text-xs sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+              High Score
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <div className="text-xl sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+              {gameState.moves}
+            </div>
+            <div className="text-xs sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+              Moves
+            </div>
+          </div>
         </div>
 
-        <div className="text-center mb-4 text-1xl sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
-         🏆 High Score: {highScore}
-        </div>
-
-        <div className="flex justify-center items-center flex-wrap gap-2 mb-6 px-2">
-          <Deck
-            drawPile={gameState.drawPile}
-            discardPile={gameState.discardPile.slice(-3)}
-            onDrawCard={handleDrawCard}
-            onCardClick={handleCardClick} // NEW
-          />
-        </div>
-
-        <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 px-2 justify-items-center w-full max-w-[420px] sm:max-w-[720px] mx-auto mb-8">
-          {gameState.columns.map((columnCards, index) => (
-            <Column
-              key={index}
-              cards={columnCards}
-              onDropCard={(card) => handleDropToColumn(card, index)}
-              onCardClick={handleCardClick} // NEW
+        {/* Responsive layout for landscape orientation */}
+        <div className="flex flex-col md:flex-row gap-4 justify-center">
+          {/* Left section - Draw/Discard pile in landscape, top in portrait */}
+          <div className="flex justify-center items-center mb-4 md:mb-0">
+            <Deck
+              drawPile={gameState.drawPile}
+              discardPile={gameState.discardPile.slice(-3)}
+              onDrawCard={handleDrawCard}
+              onCardClick={handleCardClick}
             />
-          ))}
-        </div>
+          </div>
 
-        <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 px-2 justify-items-center w-full max-w-[420px] sm:max-w-[720px] mx-auto mb-8">
-          {gameState.ecoZones.map((zone, index) => (
-            <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
-          ))}
+          {/* Right section for game columns and eco zones */}
+          <div className="flex-1 overflow-x-auto">
+            {/* Columns */}
+            <div className="grid grid-cols-5 auto-cols-min gap-1 px-1 justify-items-center w-full overflow-x-auto">
+              {gameState.columns.map((columnCards, index) => (
+                <Column
+                  key={index}
+                  cards={columnCards}
+                  onDropCard={(card) => handleDropToColumn(card, index)}
+                  onCardClick={handleCardClick}
+                />
+              ))}
+            </div>
+
+            {/* EcoZones */}
+            <div className="grid grid-cols-5 auto-cols-min gap-1 px-1 justify-items-center w-full mt-4 overflow-x-auto">
+              {gameState.ecoZones.map((zone, index) => (
+                <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="text-center mt-4">
+        
+        {/* Game controls - now side by side in a flex container */}
+        <div className="flex justify-center space-x-4 mt-4">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-blue-500 text-white px-3 py-1 sm:px-4 sm:py-2 rounded text-sm sm:text-base hover:bg-blue-600"
             onClick={() => setShowHowToPlay(true)}
           >
-          📘 How to Play
+            📘 How to Play
           </button>
-        </div>
-
-        <div className="text-center mt-8">
+          
           <button
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            className="bg-green-600 text-white px-3 py-1 sm:px-4 sm:py-2 rounded text-sm sm:text-base hover:bg-green-700"
             onClick={handleNewGame}
           >
             🔄 New Game
@@ -260,10 +288,10 @@ const App = () => {
         </div>
       </div>
       {showHowToPlay && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-lg p-6 max-w-md w-full shadow-lg relative">
-      <h2 className="text-xl font-bold mb-4 text-green-700">🌱 How to Play Eco-Solitaire</h2>
-      <ul className="list-disc ml-5 space-y-2 text-sm text-gray-800">
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="bg-white rounded-lg p-4 sm:p-6 max-w-md w-full shadow-lg relative">
+      <h2 className="text-lg sm:text-xl font-bold mb-3 text-green-700">🌱 How to Play Eco-Solitaire</h2>
+      <ul className="list-disc ml-4 sm:ml-5 space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-800">
         <li>Sort species into the correct Eco-Zone by class (Mammals, Birds, etc.).</li>
         <li>Cards must be placed in order from rank 1 (Least Concern) to 10 (Critically Endangered).</li>
         <li>Use the draw and discard piles to cycle through available cards.</li>

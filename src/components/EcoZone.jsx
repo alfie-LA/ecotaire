@@ -43,7 +43,7 @@ const EcoZone = ({ zone, onDropToZone }) => {
   return (
     <div
       ref={drop}
-      className={`w-24 min-h-[280px] overflow-hidden border p-2 rounded flex flex-col items-center 
+      className={`w-16 sm:w-20 md:w-24 min-h-[240px] sm:min-h-[260px] md:min-h-[280px] overflow-hidden border p-1 sm:p-2 rounded flex flex-col items-center 
         bg-white/30 backdrop-blur-md shadow-md transition duration-300 ease-in-out
         \${isOver && canDrop ? 'ring-4 ring-green-400 animate-pulse' : ''}
         \${!isOver && canDrop ? 'ring-2 ring-green-200' : ''}`}

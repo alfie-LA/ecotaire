@@ -18,7 +18,7 @@ const Column = ({ cards, columnIndex, onCardDrop, onCardClick, shakeCardId }) =>
   return (
     <div
       ref={drop}
-      className={`w-24 min-h-[350px] overflow-hidden border border-dashed border-gray-300 
+      className={`w-16 sm:w-20 md:w-24 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] overflow-hidden border border-dashed border-gray-300 
         rounded p-1 flex flex-col items-center transition duration-200 
         backdrop-blur-md bg-white/30 shadow-md ${isOver ? 'ring-2 ring-green-400' : ''}`}
       style={{ outline: '1px dashed blue' }}
