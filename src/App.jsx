@@ -198,30 +198,103 @@ const App = () => {
     setAnimatedScore(0);
   };
 
+  // State for device orientation
   const [windowOrientation, setWindowOrientation] = useState(
     typeof window !== 'undefined' ? 
       window.innerWidth > window.innerHeight ? 'landscape' : 'portrait' 
       : 'portrait'
   );
 
-  // Detect orientation changes
+  // Explicitly track if we're on mobile
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? 
+      window.innerWidth < 768 : false
+  );
+
+  // Detect orientation and device changes
   useEffect(() => {
     const handleResize = () => {
       setWindowOrientation(window.innerWidth > window.innerHeight ? 'landscape' : 'portrait');
+      setIsMobile(window.innerWidth < 768);
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return (
-    <div
-      className="h-[100svh] w-screen bg-cover bg-center bg-no-repeat overflow-hidden"
-      style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}
-    >
+  // Mobile landscape layout showing just active gameplay elements
+  const mobileLandscapeLayout = (
+    <div className="h-[100svh] w-screen overflow-hidden flex flex-col p-1 bg-cover bg-center"
+         style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}>
+      {/* Tiny scores - absolute positioned to save space */}
+      <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-2 py-0.5 bg-black/30 text-white text-[8px]">
+        <div className="flex-1 text-center">S:{animatedScore}</div>
+        <div className="flex-1 text-center">🏆{highScore}</div>
+        <div className="flex-1 text-center">M:{gameState.moves}</div>
+      </div>
+
+      {/* Main game layout with reduced spacing */}
+      <div className="flex flex-row mt-4 gap-0 h-[calc(100%-30px)]">
+        {/* Draw/Discard */}
+        <div className="w-[30px] flex flex-col items-center justify-start">
+          <Deck
+            drawPile={gameState.drawPile}
+            discardPile={gameState.discardPile.slice(-3)}
+            onDrawCard={handleDrawCard}
+            onCardClick={handleCardClick}
+          />
+        </div>
+
+        {/* Main game area - tight columns */}
+        <div className="flex-1 flex flex-col space-y-0">
+          {/* Columns */}
+          <div className="flex justify-between h-1/2 w-full px-0">
+            {gameState.columns.map((columnCards, index) => (
+              <Column
+                key={index}
+                columnIndex={index}
+                cards={columnCards}
+                onCardDrop={(card) => handleDropToColumn(card, index)}
+                onCardClick={handleCardClick}
+              />
+            ))}
+          </div>
+
+          {/* EcoZones */}
+          <div className="flex justify-between h-1/2 w-full px-0 pt-1">
+            {gameState.ecoZones.map((zone, index) => (
+              <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Tiny action buttons - absolute positioned */}
+      <div className="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 py-0.5 bg-black/30">
+        <button
+          className="bg-blue-500 text-white px-1 py-0 text-[7px] rounded"
+          onClick={() => setShowHowToPlay(true)}
+        >
+          📘
+        </button>
+        
+        <button
+          className="bg-green-600 text-white px-1 py-0 text-[7px] rounded"
+          onClick={handleNewGame}
+        >
+          🔄
+        </button>
+      </div>
+    </div>
+  );
+
+  // Regular layout for desktop or portrait orientation
+  const regularLayout = (
+    <div className="h-[100svh] w-screen bg-cover bg-center bg-no-repeat overflow-hidden"
+         style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}>
       <div className="h-full w-full max-w-[1300px] mx-auto px-0 sm:px-4 bg-white/30 rounded-none sm:rounded-xl shadow-lg py-1 sm:py-6 flex flex-col">
 
-        {/* Score section - ultra compact for mobile */}
+        {/* Score section */}
         <div className="grid grid-cols-3 items-center mb-0 sm:mb-4">
           <div className="text-center">
             <div className="text-base sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]">
@@ -251,10 +324,10 @@ const App = () => {
           </div>
         </div>
 
-        {/* Main content area - optimized for landscape on small screens */}
-        <div className={`flex-1 flex ${windowOrientation === 'landscape' ? 'flex-row' : 'flex-col'} gap-0 sm:gap-4 justify-center h-full`}>
-          {/* Left section - Draw/Discard pile */}
-          <div className="flex justify-center items-center mr-0 sm:mr-0">
+        {/* Main content area */}
+        <div className="flex-1 flex flex-col gap-0 sm:gap-4 justify-center h-full">
+          {/* Draw/Discard pile */}
+          <div className="flex justify-center items-center">
             <Deck
               drawPile={gameState.drawPile}
               discardPile={gameState.discardPile.slice(-3)}
@@ -263,10 +336,10 @@ const App = () => {
             />
           </div>
 
-          {/* Right section for game columns and eco zones */}
-          <div className="flex-1 flex flex-col justify-between h-full py-0 pl-0 sm:pl-0">
+          {/* Cards area */}
+          <div className="flex-1 flex flex-col justify-between h-full py-0">
             {/* Columns */}
-            <div className="grid grid-cols-5 gap-0 justify-items-center w-full -mx-6 sm:mx-0">
+            <div className="grid grid-cols-5 gap-0 justify-items-center w-full">
               {gameState.columns.map((columnCards, index) => (
                 <Column
                   key={index}
@@ -279,7 +352,7 @@ const App = () => {
             </div>
 
             {/* EcoZones */}
-            <div className="grid grid-cols-5 gap-0 justify-items-center w-full -mx-6 sm:mx-0 mt-0 sm:mt-4">
+            <div className="grid grid-cols-5 gap-0 justify-items-center w-full mt-0 sm:mt-4">
               {gameState.ecoZones.map((zone, index) => (
                 <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
               ))}
@@ -287,7 +360,7 @@ const App = () => {
           </div>
         </div>
         
-        {/* Game controls - bottom buttons */}
+        {/* Game controls */}
         <div className="flex justify-center space-x-1 sm:space-x-4 mt-0 sm:mt-4 pb-1">
           <button
             className="bg-blue-500 text-white px-1 py-0 sm:px-4 sm:py-2 rounded text-[10px] sm:text-base hover:bg-blue-600"
@@ -304,7 +377,17 @@ const App = () => {
           </button>
         </div>
       </div>
-      {showHowToPlay && (
+    </div>
+  );
+
+  // Choose layout based on device and orientation
+  return (
+    <>
+      {(isMobile && windowOrientation === 'landscape') 
+        ? mobileLandscapeLayout 
+        : regularLayout}
+      
+      {showHowToPlay && 
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
     <div className="bg-white rounded-lg p-4 sm:p-6 max-w-md w-full shadow-lg relative">
       <h2 className="text-lg sm:text-xl font-bold mb-3 text-green-700">🌱 How to Play Eco-Solitaire</h2>
@@ -323,8 +406,8 @@ const App = () => {
       </button>
     </div>
   </div>
-)}
-    </div>
+}
+    </>
   );
 };
 

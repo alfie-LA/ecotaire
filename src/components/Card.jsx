@@ -57,7 +57,7 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
     <div
       ref={isTop ? drag : null}
       onClick={handleClick}
-      className={`w-4 h-7 sm:w-16 md:w-20 sm:h-24 md:h-28 rounded-none sm:rounded shadow-none sm:shadow-md mb-[-40px] sm:mb-[-60px] z-10 relative border-0 sm:border-2 ${border} ${
+      className={`w-6 h-6 sm:w-16 md:w-20 sm:h-24 md:h-28 rounded-none sm:rounded shadow-none sm:shadow-md mb-[-4px] xs:mb-[-40px] sm:mb-[-60px] z-10 relative border-0 sm:border-2 ${border} ${
         card.faceUp ? `${bg} text-black` : 'bg-gray-700'
       } ${isDragging ? 'opacity-50' : ''} cursor-pointer ${shakeCardId === card.id ? 'animate-shake' : ''}`}
     >

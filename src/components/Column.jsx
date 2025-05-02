@@ -18,7 +18,7 @@ const Column = ({ cards, columnIndex, onCardDrop, onCardClick, shakeCardId }) =>
   return (
     <div
       ref={drop}
-      className={`w-3 sm:w-16 md:w-24 min-h-[70px] sm:min-h-[250px] md:min-h-[350px] overflow-hidden border-0 sm:border sm:border-dashed sm:border-gray-300 
+      className={`w-10 xs:w-3 sm:w-16 md:w-24 min-h-[30px] xs:min-h-[70px] sm:min-h-[250px] md:min-h-[350px] overflow-hidden border-0 sm:border sm:border-dashed sm:border-gray-300 
         rounded-sm sm:rounded p-0 sm:p-1 flex flex-col items-center transition duration-200 
         backdrop-blur-md bg-white/20 sm:bg-white/30 shadow-sm sm:shadow-md ${isOver ? 'ring-1 sm:ring-2 ring-green-400' : ''}`}
       style={{ outline: '0 sm:1px dashed transparent sm:blue' }}
