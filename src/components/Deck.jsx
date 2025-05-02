@@ -20,7 +20,7 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
   const visibleDiscards = discardPile.slice(-3);
 
   return (
-    <div className="flex gap-2 sm:gap-6 md:gap-24 items-start">
+    <div className="flex gap-1 sm:gap-6 md:gap-24 items-start">
       {/* Draw Pile */}
       <div
         onClick={onDrawCard}
