@@ -198,47 +198,63 @@ const App = () => {
     setAnimatedScore(0);
   };
 
+  const [windowOrientation, setWindowOrientation] = useState(
+    typeof window !== 'undefined' ? 
+      window.innerWidth > window.innerHeight ? 'landscape' : 'portrait' 
+      : 'portrait'
+  );
+
+  // Detect orientation changes
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowOrientation(window.innerWidth > window.innerHeight ? 'landscape' : 'portrait');
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div
-      className="h-[100svh] bg-cover bg-center bg-no-repeat"
+      className="h-[100svh] w-screen bg-cover bg-center bg-no-repeat overflow-hidden"
       style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}
     >
-      <div className="h-full w-full max-w-[1300px] mx-auto px-1 sm:px-4 bg-white/30 rounded-xl shadow-lg py-2 sm:py-6 flex flex-col">
+      <div className="h-full w-full max-w-[1300px] mx-auto px-0 sm:px-4 bg-white/30 rounded-none sm:rounded-xl shadow-lg py-1 sm:py-6 flex flex-col">
 
-        {/* Score section - compact for mobile */}
-        <div className="grid grid-cols-3 items-center mb-1 sm:mb-4">
+        {/* Score section - ultra compact for mobile */}
+        <div className="grid grid-cols-3 items-center mb-0 sm:mb-4">
           <div className="text-center">
-            <div className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]">
+            <div className="text-base sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)]">
               {animatedScore}
             </div>
-            <div className="text-[10px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+            <div className="text-[8px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
               Score
             </div>
           </div>
           
           <div className="text-center">
-            <div className="text-lg sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
-              🏆 {highScore}
+            <div className="text-sm sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+              🏆{highScore}
             </div>
-            <div className="text-[10px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+            <div className="text-[8px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
               High Score
             </div>
           </div>
           
           <div className="text-center">
-            <div className="text-lg sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+            <div className="text-sm sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
               {gameState.moves}
             </div>
-            <div className="text-[10px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
+            <div className="text-[8px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)]">
               Moves
             </div>
           </div>
         </div>
 
-        {/* Main content area - fills available space */}
-        <div className="flex-1 flex flex-col landscape:flex-row gap-1 sm:gap-4 justify-center">
+        {/* Main content area - optimized for landscape on small screens */}
+        <div className={`flex-1 flex ${windowOrientation === 'landscape' ? 'flex-row' : 'flex-col'} gap-0 sm:gap-4 justify-center h-full`}>
           {/* Left section - Draw/Discard pile */}
-          <div className="flex justify-center items-start landscape:items-center">
+          <div className="flex justify-center items-center">
             <Deck
               drawPile={gameState.drawPile}
               discardPile={gameState.discardPile.slice(-3)}
@@ -248,9 +264,9 @@ const App = () => {
           </div>
 
           {/* Right section for game columns and eco zones */}
-          <div className="flex-1 flex flex-col justify-between">
+          <div className="flex-1 flex flex-col justify-between h-full py-0">
             {/* Columns */}
-            <div className="grid grid-cols-5 gap-[2px] sm:gap-1 justify-items-center w-full">
+            <div className="grid grid-cols-5 gap-0 sm:gap-1 justify-items-center w-full">
               {gameState.columns.map((columnCards, index) => (
                 <Column
                   key={index}
@@ -262,7 +278,7 @@ const App = () => {
             </div>
 
             {/* EcoZones */}
-            <div className="grid grid-cols-5 gap-[2px] sm:gap-1 justify-items-center w-full mt-1 sm:mt-4">
+            <div className="grid grid-cols-5 gap-0 sm:gap-1 justify-items-center w-full mt-0 sm:mt-4">
               {gameState.ecoZones.map((zone, index) => (
                 <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
               ))}
@@ -271,16 +287,16 @@ const App = () => {
         </div>
         
         {/* Game controls - bottom buttons */}
-        <div className="flex justify-center space-x-2 sm:space-x-4 mt-1 sm:mt-4">
+        <div className="flex justify-center space-x-1 sm:space-x-4 mt-0 sm:mt-4 pb-1">
           <button
-            className="bg-blue-500 text-white px-2 py-[2px] sm:px-4 sm:py-2 rounded text-xs sm:text-base hover:bg-blue-600"
+            className="bg-blue-500 text-white px-1 py-0 sm:px-4 sm:py-2 rounded text-[10px] sm:text-base hover:bg-blue-600"
             onClick={() => setShowHowToPlay(true)}
           >
             📘 How to Play
           </button>
           
           <button
-            className="bg-green-600 text-white px-2 py-[2px] sm:px-4 sm:py-2 rounded text-xs sm:text-base hover:bg-green-700"
+            className="bg-green-600 text-white px-1 py-0 sm:px-4 sm:py-2 rounded text-[10px] sm:text-base hover:bg-green-700"
             onClick={handleNewGame}
           >
             🔄 New Game
