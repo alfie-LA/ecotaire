@@ -1,5 +1,4 @@
-
-// components/Card.jsx
+// Fixed Card.jsx component
 import React, { useState, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 
@@ -34,28 +33,14 @@ const getClassIconPath = (animalClass) => {
 const Card = ({ card, isTop, onClick, shakeCardId }) => {
   if (!card) return null;
 
-  const [orientation, setOrientation] = useState(
-    window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
-  );
-
-  // Listen for orientation changes
-  useEffect(() => {
-    const handleResize = () => {
-      setOrientation(window.innerWidth > window.innerHeight ? 'landscape' : 'portrait');
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // Force cards to be wider than tall in ALL orientations with !important flags
+  // and explicit fixed dimensions
+  const cardSizeClasses = 
+    'Card min-w-[60px] !min-w-[60px] max-h-[40px] !max-h-[40px] w-[60px] !w-[60px] h-[40px] !h-[40px] sm:w-16 md:w-20 sm:h-24 md:h-28';
 
   const border = getRankBorder(card.rank);
   const bg = getClassBackground(card.class || card.className);
   const iconSrc = getClassIconPath(card.class || card.className);
-
-  // Adjust sizing for portrait (60px × 40px) and landscape
-  const cardSizeClasses = orientation === 'landscape' && window.innerHeight < 500
-    ? 'w-12 h-6 sm:w-14 md:w-16 sm:h-16 md:h-20' // Smaller in landscape
-    : 'w-[60px] h-[40px] sm:w-16 md:w-20 sm:h-24 md:h-28'; // 60×40px ratio for portrait mode
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CARD',
@@ -79,11 +64,15 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
       className={`${cardSizeClasses} rounded-md sm:rounded shadow-sm sm:shadow-md z-10 relative border border ${border} ${
         card.faceUp ? `${bg} text-black` : 'bg-gray-700'
       } ${isDragging ? 'opacity-50' : ''} cursor-pointer ${shakeCardId === card.id ? 'animate-shake' : ''}`}
+      style={{ width: '60px', height: '40px', minWidth: '60px', maxHeight: '40px' }}
     >
       {card.faceUp ? (
-        <div className="w-full h-full p-0 sm:p-1 relative flex flex-col justify-between">
-          {/* Top-left rank and side-by-side icon */}
-          <div className="flex items-center justify-between w-full h-full p-1">
+        <div className="w-full h-full relative">
+          {/* Force horizontal layout with flexbox and inline style */}
+          <div 
+            className="flex items-center justify-between w-full h-full p-1 !flex-row"
+            style={{ display: 'flex', flexDirection: 'row' }}
+          >
             <div className="text-[16px] sm:text-xs md:text-base font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
               {card.rank}
             </div>
@@ -102,7 +91,8 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
           </div>
         </div>
       ) : (
-        <div className="w-full h-full flex items-center justify-center text-gray-400 text-[10px] sm:text-xl">
+        <div className="w-full h-full flex items-center justify-center text-gray-400 text-[10px] sm:text-xl"
+             style={{ display: 'flex', flexDirection: 'row' }}>
           🂠
         </div>
       )}
@@ -111,4 +101,3 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
 };
 
 export default Card;
-

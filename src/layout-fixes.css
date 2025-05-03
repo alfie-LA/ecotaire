@@ -1,0 +1,64 @@
+/* Critical CSS fixes for Eco-Solitaire mobile layout */
+
+/* Force cards to be wider than tall in ALL orientations */
+.Card {
+  min-width: 60px !important;
+  max-height: 40px !important;
+  width: 60px !important;
+  height: 40px !important;
+}
+
+/* Ensure columns have consistent width */
+.Column {
+  width: 20% !important;
+  min-width: 60px !important;
+  max-width: 70px !important;
+}
+
+/* Ensure eco zones have consistent width */
+.EcoZone {
+  width: 20% !important;
+  min-width: 60px !important;
+  max-width: 70px !important;
+}
+
+/* Force horizontal layout inside cards */
+.Card > div > div {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+/* Better contrast for card content */
+.Card > div > div > div {
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+/* Media query for portrait orientation */
+@media (orientation: portrait) {
+  .Card {
+    min-width: 60px !important;
+    max-height: 40px !important;
+    width: 60px !important;
+    height: 40px !important;
+  }
+  
+  /* Less overlap in portrait mode */
+  .Column > div {
+    margin-bottom: -32px !important;
+  }
+}
+
+/* Media query for landscape orientation */
+@media (orientation: landscape) {
+  .Card {
+    min-width: 60px !important;
+    max-height: 40px !important;
+    width: 60px !important;
+    height: 40px !important;
+  }
+  
+  /* More overlap in landscape due to shorter height */
+  .Column > div {
+    margin-bottom: -38px !important;
+  }
+}

@@ -1,4 +1,4 @@
-// components/EcoZone.jsx
+// Fixed EcoZone.jsx
 import React from 'react';
 import { useDrop } from 'react-dnd';
 import Card from './Card';
@@ -42,11 +42,11 @@ const EcoZone = ({ zone, onDropToZone }) => {
   return (
     <div
       ref={drop}
-      className={`w-[19%] max-w-[70px] sm:w-16 md:w-24 min-h-[140px] sm:min-h-[200px] md:min-h-[280px] landscape:min-h-[150px] overflow-hidden border border-solid border-gray-400 p-0.5 sm:p-1 md:p-2 rounded-md sm:rounded flex flex-col items-center 
-        bg-white/30 sm:bg-white/30 backdrop-blur-md shadow-md sm:shadow-md transition duration-300 ease-in-out
+      className={`EcoZone w-[20%] !w-[20%] min-w-[60px] !min-w-[60px] max-w-[70px] !max-w-[70px] sm:w-16 md:w-24 min-h-[140px] sm:min-h-[200px] md:min-h-[280px] landscape:min-h-[150px] overflow-hidden border border-solid border-gray-400 p-0.5 sm:p-1 md:p-2 rounded-md sm:rounded flex flex-col items-center 
+        bg-white/60 sm:bg-white/30 backdrop-blur-md shadow-md sm:shadow-md transition duration-300 ease-in-out
         ${isOver && canDrop ? 'ring-2 sm:ring-4 ring-green-400 animate-pulse' : ''}
         ${!isOver && canDrop ? 'ring-2 sm:ring-2 ring-green-200' : ''}`}
-      style={{ outline: '0' }}
+      style={{ width: '20%', minWidth: '60px', maxWidth: '70px', outline: '0' }}
     >
       {/* Class icon header stays fixed - reduced spacing */}
       <img
@@ -77,6 +77,3 @@ const EcoZone = ({ zone, onDropToZone }) => {
 };
 
 export default EcoZone;
-
-
-
