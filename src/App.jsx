@@ -386,7 +386,7 @@ const App = () => {
       className="h-[100svh] w-screen bg-cover bg-center bg-no-repeat overflow-hidden"
       style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}
     >
-      <div className="h-full w-full max-w-[1300px] mx-auto px-2 sm:px-4 bg-white/50 rounded-none sm:rounded-xl shadow-lg py-1 sm:py-6 flex flex-col">
+      <div className="h-full w-full max-w-[1300px] mx-auto px-2 sm:px-4 bg-white/50 rounded-none sm:rounded-xl shadow-lg py-2 sm:py-6 flex flex-col">
         
         {/* Score section - extremely compact in portrait mode */}
         <div className={`grid ${windowOrientation === 'landscape' ? 'landscape:grid-rows-3 landscape:grid-cols-1 landscape:absolute landscape:left-1 landscape:top-1/2 landscape:transform landscape:-translate-y-1/2 landscape:z-10' : 'grid-cols-3'} items-center mb-2 sm:mb-4 py-1 bg-black/30 rounded shadow-md`}>
@@ -433,7 +433,7 @@ const App = () => {
           {/* Right section for game columns and eco zones - more compact spacing */}
           <div className="flex-1 flex flex-col justify-between h-full py-0 pl-0 sm:pl-0">
             {/* Columns */}
-            <div className="grid grid-cols-5 gap-2 sm:gap-0 justify-items-center w-full mx-0 sm:mx-0">
+            <div className="grid grid-cols-5 gap-2 sm:gap-0 justify-items-center w-full mx-0 sm:mx-0 mb-3">
               {gameState.columns.map((columnCards, index) => (
                 <Column
                   key={index}
@@ -446,7 +446,7 @@ const App = () => {
             </div>
 
             {/* Small gap between columns and eco zones in portrait */}
-            <div className={`grid grid-cols-5 gap-2 sm:gap-0 justify-items-center w-full mx-0 sm:mx-0 ${windowOrientation === 'landscape' ? 'landscape:mt-1' : 'mt-4 sm:mt-4'} mb-0`}>
+            <div className={`grid grid-cols-5 gap-2 sm:gap-0 justify-items-center w-full mx-0 sm:mx-0 ${windowOrientation === 'landscape' ? 'landscape:mt-1' : 'mt-2 sm:mt-4'} mb-2`}>
               {gameState.ecoZones.map((zone, index) => (
                 <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
               ))}
@@ -455,16 +455,16 @@ const App = () => {
         </div>
         
         {/* Game controls - repositioned in landscape mode, more compact in portrait */}
-        <div className={`flex ${windowOrientation === 'landscape' ? 'landscape:absolute landscape:right-2 landscape:top-1 landscape:flex-col landscape:space-y-1 landscape:space-x-0' : 'justify-center space-x-4 sm:space-x-4'} mt-2 sm:mt-4 pb-1 h-[40px]`}>
+        <div className={`flex ${windowOrientation === 'landscape' ? 'landscape:absolute landscape:right-2 landscape:top-1 landscape:flex-col landscape:space-y-1 landscape:space-x-0' : 'justify-center space-x-4 sm:space-x-4'} mt-2 sm:mt-4 pb-1`}>
           <button
-            className="bg-blue-600 text-white px-4 py-1 sm:px-4 sm:py-2 rounded-lg text-lg sm:text-base hover:bg-blue-700 h-full shadow-md active:shadow-inner active:translate-y-0.5 transition-all"
+            className="bg-blue-600 text-white w-[40px] h-[40px] flex items-center justify-center sm:px-4 sm:py-2 rounded-lg text-lg sm:text-base hover:bg-blue-700 shadow-md active:shadow-inner active:translate-y-0.5 transition-all"
             onClick={() => setShowHowToPlay(true)}
           >
             📘
           </button>
           
           <button
-            className="bg-green-600 text-white px-4 py-1 sm:px-4 sm:py-2 rounded-lg text-lg sm:text-base hover:bg-green-700 h-full shadow-md active:shadow-inner active:translate-y-0.5 transition-all"
+            className="bg-green-600 text-white w-[40px] h-[40px] flex items-center justify-center sm:px-4 sm:py-2 rounded-lg text-lg sm:text-base hover:bg-green-700 shadow-md active:shadow-inner active:translate-y-0.5 transition-all"
             onClick={handleNewGame}
           >
             🔄

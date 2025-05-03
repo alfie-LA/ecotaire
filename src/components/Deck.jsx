@@ -37,7 +37,7 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
       {/* Draw Pile - ultra compact height in portrait mobile */}
       <div
         onClick={onDrawCard}
-        className="relative w-[45%] h-[48px] sm:w-14 md:w-20 landscape:w-14 sm:h-24 md:h-28 landscape:h-20 cursor-pointer flex flex-col items-center justify-center bg-white/30 backdrop-blur-md border border-gray-400 rounded-md sm:rounded shadow-md sm:shadow-md hover:ring-2 sm:hover:ring-2 hover:ring-green-400 transition"
+        className="relative w-[60px] h-[40px] sm:w-14 md:w-20 landscape:w-14 sm:h-24 md:h-28 landscape:h-20 cursor-pointer flex flex-col items-center justify-center bg-white/30 backdrop-blur-md border border-gray-400 rounded-md sm:rounded shadow-md sm:shadow-md hover:ring-2 sm:hover:ring-2 hover:ring-green-400 transition"
         title={showRecycle ? 'Recycle' : drawPile.length > 0 ? 'Click to draw' : ''}
       >
         {showRecycle ? (
@@ -53,7 +53,7 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
             <img
               src="/assets/icons/draw-pile.png"
               alt="Draw pile"
-              className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
+              className="w-8 h-8 sm:w-8 sm:h-8 object-contain"
               loading="lazy"
               onError={(e) => {
                 e.target.onerror = null;
@@ -65,13 +65,13 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
       </div>
 
       {/* Discard Pile — shows up to 3 stacked cards with more width */}
-      <div className="relative w-[45%] h-[48px] sm:w-14 md:w-20 landscape:w-14 sm:h-24 md:h-28 landscape:h-20">
+      <div className="relative w-[60px] h-[40px] sm:w-14 md:w-20 landscape:w-14 sm:h-24 md:h-28 landscape:h-20">
         {visibleDiscards.map((card, idx) => (
           <div
             key={card.id}
             ref={idx === visibleDiscards.length - 1 ? drag : null}
             className={`absolute top-0 left-0 z-[${idx}]`}
-            style={{ marginLeft: `${idx * (isCompactLandscape ? -4 : -6)}px` }}
+            style={{ marginLeft: `${idx * (isCompactLandscape ? -4 : -8)}px` }}
           >
             <Card
               card={card}
@@ -83,7 +83,7 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
         ))}
 
         {visibleDiscards.length === 0 && (
-          <div className="w-full h-full bg-gray-200 border border-gray-400 flex items-center justify-center text-[10px] sm:text-sm text-gray-500 rounded-md sm:rounded shadow-md">
+          <div className="w-full h-full bg-white/30 border border-gray-400 flex items-center justify-center text-[10px] sm:text-sm text-gray-500 rounded-md sm:rounded shadow-md">
             -
           </div>
         )}

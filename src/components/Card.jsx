@@ -52,10 +52,10 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
   const bg = getClassBackground(card.class || card.className);
   const iconSrc = getClassIconPath(card.class || card.className);
 
-  // Adjust sizing for portrait (must be wider than taller) and landscape
+  // Adjust sizing for portrait (60px × 40px) and landscape
   const cardSizeClasses = orientation === 'landscape' && window.innerHeight < 500
     ? 'w-12 h-6 sm:w-14 md:w-16 sm:h-16 md:h-20' // Smaller in landscape
-    : 'w-[60px] h-[36px] sm:w-16 md:w-20 sm:h-24 md:h-28'; // Must be wider than tall for portrait mode
+    : 'w-[60px] h-[40px] sm:w-16 md:w-20 sm:h-24 md:h-28'; // 60×40px ratio for portrait mode
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CARD',
@@ -91,7 +91,7 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
             <img
               src={iconSrc}
               alt={card.class}
-              className="w-10 h-10 sm:w-10 sm:h-10 md:w-14 md:h-14 object-contain"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 object-contain"
               loading="lazy"
             />
           </div>
