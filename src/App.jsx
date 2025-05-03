@@ -433,7 +433,7 @@ const App = () => {
           {/* Right section for game columns and eco zones - more compact spacing */}
           <div className="flex-1 flex flex-col justify-between h-full py-0 pl-0 sm:pl-0">
             {/* Columns */}
-            <div className="grid grid-cols-5 gap-0 justify-items-center w-full mx-0 sm:mx-0">
+            <div className="grid grid-cols-5 gap-1 sm:gap-0 justify-items-center w-full mx-0 sm:mx-0">
               {gameState.columns.map((columnCards, index) => (
                 <Column
                   key={index}
@@ -445,8 +445,8 @@ const App = () => {
               ))}
             </div>
 
-            {/* No gap between columns and eco zones in portrait */}
-            <div className={`grid grid-cols-5 gap-0 justify-items-center w-full mx-0 sm:mx-0 ${windowOrientation === 'landscape' ? 'landscape:mt-1' : 'mt-0 sm:mt-4'} mb-0`}>
+            {/* Small gap between columns and eco zones in portrait */}
+            <div className={`grid grid-cols-5 gap-1 sm:gap-0 justify-items-center w-full mx-0 sm:mx-0 ${windowOrientation === 'landscape' ? 'landscape:mt-1' : 'mt-1 sm:mt-4'} mb-0`}>
               {gameState.ecoZones.map((zone, index) => (
                 <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
               ))}

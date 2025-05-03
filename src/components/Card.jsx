@@ -55,7 +55,7 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
   // Adjust sizing for portrait (ultra compact) and landscape
   const cardSizeClasses = orientation === 'landscape' && window.innerHeight < 500
     ? 'w-3 h-5 sm:w-14 md:w-16 sm:h-16 md:h-20' // Smaller in landscape
-    : 'w-[70px] h-[90px] sm:w-16 md:w-20 sm:h-24 md:h-28'; // Wider cards that fill columns
+    : 'w-full h-[90px] sm:w-16 md:w-20 sm:h-24 md:h-28'; // Full-width cards to fill columns
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CARD',
