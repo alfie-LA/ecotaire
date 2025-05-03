@@ -42,17 +42,17 @@ const EcoZone = ({ zone, onDropToZone }) => {
   return (
     <div
       ref={drop}
-      className={`w-[18%] sm:w-16 md:w-24 min-h-[35px] sm:min-h-[200px] md:min-h-[280px] landscape:min-h-[150px] overflow-hidden border-0 sm:border p-0 sm:p-1 md:p-2 rounded-sm sm:rounded flex flex-col items-center 
-        bg-white/40 sm:bg-white/30 backdrop-blur-md shadow-md sm:shadow-md transition duration-300 ease-in-out
-        ${isOver && canDrop ? 'ring-1 sm:ring-4 ring-green-400 animate-pulse' : ''}
-        ${!isOver && canDrop ? 'ring-1 sm:ring-2 ring-green-200' : ''}`}
+      className={`w-[19%] max-w-[80px] sm:w-16 md:w-24 min-h-[35px] sm:min-h-[200px] md:min-h-[280px] landscape:min-h-[150px] overflow-hidden border border-solid border-gray-400 p-0.5 sm:p-1 md:p-2 rounded-md sm:rounded flex flex-col items-center 
+        bg-white/80 sm:bg-white/30 backdrop-blur-md shadow-md sm:shadow-md transition duration-300 ease-in-out
+        ${isOver && canDrop ? 'ring-2 sm:ring-4 ring-green-400 animate-pulse' : ''}
+        ${!isOver && canDrop ? 'ring-2 sm:ring-2 ring-green-200' : ''}`}
       style={{ outline: '0' }}
     >
       {/* Class icon header stays fixed - reduced spacing */}
       <img
         src={iconSrc}
         alt={zone.className}
-        className="w-10 h-10 sm:w-12 sm:h-12 landscape:w-8 landscape:h-8 mb-0 sm:mb-2 object-contain"
+        className="w-12 h-12 sm:w-12 sm:h-12 landscape:w-8 landscape:h-8 mb-0 sm:mb-2 object-contain drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]"
         loading="lazy"
         onError={(e) => {
           e.target.onerror = null;

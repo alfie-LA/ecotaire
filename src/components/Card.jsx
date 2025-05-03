@@ -52,10 +52,10 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
   const bg = getClassBackground(card.class || card.className);
   const iconSrc = getClassIconPath(card.class || card.className);
 
-  // Adjust sizing for portrait (balance width/height ratio) and landscape
+  // Adjust sizing for portrait (wider rather than taller) and landscape
   const cardSizeClasses = orientation === 'landscape' && window.innerHeight < 500
     ? 'w-3 h-5 sm:w-14 md:w-16 sm:h-16 md:h-20' // Smaller in landscape
-    : 'w-full h-[65px] sm:w-16 md:w-20 sm:h-24 md:h-28'; // Better width/height ratio for cards
+    : 'w-[75px] h-[48px] sm:w-16 md:w-20 sm:h-24 md:h-28'; // Increased width and height for better visibility on mobile
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CARD',
@@ -76,19 +76,18 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
     <div
       ref={isTop ? drag : null}
       onClick={handleClick}
-      className={`${cardSizeClasses} rounded-none sm:rounded shadow-none sm:shadow-md z-10 relative border-0 sm:border-2 ${border} ${
+      className={`${cardSizeClasses} rounded-md sm:rounded shadow-md sm:shadow-md z-10 relative border border-2 ${border} ${
         card.faceUp ? `${bg} text-black` : 'bg-gray-700'
       } ${isDragging ? 'opacity-50' : ''} cursor-pointer ${shakeCardId === card.id ? 'animate-shake' : ''}`}
     >
       {card.faceUp ? (
         <div className="w-full h-full p-0 sm:p-1 relative flex flex-col justify-between">
-          {/* Top-left rank */}
-          <div className="absolute top-0 left-1 text-[10px] sm:text-xs md:text-base font-bold">
-            {card.rank}
-          </div>
-
-          {/* Center large icon */}
-          <div className="flex-grow flex items-center justify-center -mt-2 sm:mt-0">
+          {/* Top-left rank and side-by-side icon */}
+          <div className="flex items-center justify-between w-full h-full p-1">
+            <div className="text-[16px] sm:text-xs md:text-base font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
+              {card.rank}
+            </div>
+            
             <img
               src={iconSrc}
               alt={card.class}
