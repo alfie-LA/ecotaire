@@ -33,7 +33,7 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
   const isCompactLandscape = windowOrientation === 'landscape' && window.innerHeight < 500;
 
   return (
-    <div className="flex gap-1 sm:gap-4 md:gap-6 landscape:gap-2 items-start">
+    <div className="flex justify-center gap-3 sm:gap-4 md:gap-6 landscape:gap-2 items-start">
       {/* Draw Pile - ultra compact height in portrait mobile */}
       <div
         onClick={onDrawCard}

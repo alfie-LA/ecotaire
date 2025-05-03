@@ -18,9 +18,9 @@ const Column = ({ cards, columnIndex, onCardDrop, onCardClick, shakeCardId }) =>
   return (
     <div
       ref={drop}
-      className={`w-[19%] sm:w-16 md:w-24 min-h-[50px] sm:min-h-[250px] md:min-h-[350px] landscape:min-h-[200px] overflow-hidden border-0 sm:border sm:border-dashed sm:border-gray-300 
+      className={`w-[18%] sm:w-16 md:w-24 min-h-[50px] sm:min-h-[250px] md:min-h-[350px] landscape:min-h-[200px] overflow-hidden border-0 sm:border sm:border-dashed sm:border-gray-300 
         rounded-sm sm:rounded p-0 sm:p-1 flex flex-col items-center transition duration-200 
-        backdrop-blur-md bg-white/20 sm:bg-white/30 shadow-sm sm:shadow-md ${isOver ? 'ring-1 sm:ring-2 ring-green-400' : ''}`}
+        backdrop-blur-md bg-white/40 sm:bg-white/30 shadow-md sm:shadow-md ${isOver ? 'ring-1 sm:ring-2 ring-green-400' : ''}`}
       style={{ outline: '0 sm:1px dashed transparent sm:blue' }}
     >
       {cards.length === 0 ? (
@@ -33,7 +33,7 @@ const Column = ({ cards, columnIndex, onCardDrop, onCardClick, shakeCardId }) =>
           // Extremely compact spacing in portrait mode for mobile
           const marginClass = isCompactLandscape
             ? card.faceUp ? 'mb-[-60px] sm:mb-[-45px]' : 'mb-[-60px] sm:mb-[-45px]'
-            : card.faceUp ? 'mb-[-75px] sm:mb-[-20px]' : 'mb-[-75px] sm:mb-[-20px]'; // Higher overlap to save vertical space
+            : card.faceUp ? 'mb-[-55px] sm:mb-[-20px]' : 'mb-[-55px] sm:mb-[-20px]'; // Better ratio for card visibility
             
           return (
             <div
