@@ -1,7 +1,18 @@
+import React from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import '../src/index.css'; // Import your Tailwind CSS
+
+// Add a global decorator to provide DnD context to all stories
+const withDndProvider = (Story) => (
+  <DndProvider backend={HTML5Backend}>
+    <Story />
+  </DndProvider>
+);
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
+  decorators: [withDndProvider],
   parameters: {
     controls: {
       matchers: {
@@ -60,6 +71,7 @@ const preview = {
         },
       },
     },
+    actions: { argTypesRegex: '^on.*' },
   },
 };
 

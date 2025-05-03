@@ -1,6 +1,4 @@
 import React from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import Column from '../components/Column';
 import EcoZone from '../components/EcoZone';
 import Deck from '../components/Deck';
@@ -10,13 +8,6 @@ export default {
   parameters: {
     layout: 'fullscreen',
   },
-  decorators: [
-    (Story) => (
-      <DndProvider backend={HTML5Backend}>
-        <Story />
-      </DndProvider>
-    ),
-  ],
 };
 
 // Helper to create card objects

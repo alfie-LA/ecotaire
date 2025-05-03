@@ -1,5 +1,4 @@
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import React from 'react';
 import Column from './Column';
 
 export default {
@@ -11,11 +10,9 @@ export default {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <DndProvider backend={HTML5Backend}>
-        <div style={{ padding: '1rem' }}>
-          <Story />
-        </div>
-      </DndProvider>
+      <div style={{ padding: '1rem' }}>
+        <Story />
+      </div>
     ),
   ],
 };
