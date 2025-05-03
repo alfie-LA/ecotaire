@@ -4,7 +4,33 @@ import Column from './components/Column';
 import EcoZone from './components/EcoZone';
 import { initializeGame } from './utils/gameUtils';
 
+// Add inline CSS directly for critical card sizing
+
 const App = () => {
+  // Add inline critical CSS to ensure card dimensions
+  useEffect(() => {
+    // Add critical CSS styles directly to the document head
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .Card, [class*="Card"] {
+        width: 60px !important;
+        height: 40px !important;
+        min-width: 60px !important;
+        max-height: 40px !important;
+      }
+      
+      .Card > div > div, [class*="Card"] > div > div {
+        display: flex !important;
+        flex-direction: row !important;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   const [gameState, setGameState] = useState(() => ({
     ...initializeGame(),
     score: 0,

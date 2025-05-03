@@ -1,5 +1,31 @@
 /* Critical CSS fixes for Eco-Solitaire mobile layout */
 
+:root {
+  --card-width: 60px;
+  --card-height: 40px;
+}
+
+/* Highest specificity selector to override all other styles */
+html body [class*="Card"],
+html body .Card {
+  width: var(--card-width) !important;
+  height: var(--card-height) !important;
+  min-width: var(--card-width) !important;
+  max-height: var(--card-height) !important;
+  display: block !important;
+}
+
+/* Force horizontal layout for card content */
+html body [class*="Card"] > div > div,
+html body .Card > div > div {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
 /* Force cards to be wider than tall in ALL orientations */
 .Card {
   min-width: 60px !important;
@@ -35,11 +61,27 @@
 
 /* Media query for portrait orientation */
 @media (orientation: portrait) {
-  .Card {
+  .Card, [class*="Card"] {
     min-width: 60px !important;
     max-height: 40px !important;
     width: 60px !important;
     height: 40px !important;
+  }
+  
+  .Column, [class*="Column"] {
+    width: 20% !important;
+    min-width: 60px !important;
+    max-width: 70px !important;
+    min-height: 190px !important;
+    background-color: rgba(255, 255, 255, 0.6) !important;
+  }
+  
+  .EcoZone, [class*="EcoZone"] {
+    width: 20% !important;
+    min-width: 60px !important;
+    max-width: 70px !important;
+    min-height: 140px !important;
+    background-color: rgba(255, 255, 255, 0.6) !important;
   }
   
   /* Less overlap in portrait mode */
@@ -50,7 +92,7 @@
 
 /* Media query for landscape orientation */
 @media (orientation: landscape) {
-  .Card {
+  .Card, [class*="Card"] {
     min-width: 60px !important;
     max-height: 40px !important;
     width: 60px !important;
