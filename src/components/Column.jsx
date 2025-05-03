@@ -18,8 +18,8 @@ const Column = ({ cards, columnIndex, onCardDrop, onCardClick, shakeCardId }) =>
   return (
     <div
       ref={drop}
-      className={`w-auto min-h-[200px] overflow-hidden border border-dashed border-gray-300 
-        rounded p-1 flex flex-col items-center transition duration-200 
+      className={`w-14 min-h-[200px] overflow-hidden border border-dashed border-gray-300 
+        rounded p-0 flex flex-col items-center transition duration-200 
         backdrop-blur-md bg-white/30 shadow-md ${isOver ? 'ring-2 ring-green-400' : ''}`}
     >
       {cards.length === 0 ? (

@@ -403,8 +403,8 @@ const App = () => {
           />
         </div>
 
-        {/* Game Columns - simplified */}
-        <div className="grid grid-cols-5 gap-0 px-0 w-full mb-2">
+        {/* Game Columns - simplified & tight spacing */}
+        <div className="flex justify-center space-x-0.5 w-full mb-2">
           {gameState.columns.map((columnCards, index) => (
             <Column
               key={index}
@@ -416,8 +416,8 @@ const App = () => {
           ))}
         </div>
 
-        {/* EcoZones - simplified */}
-        <div className="grid grid-cols-5 gap-0 px-0 w-full mb-2">
+        {/* EcoZones - simplified & tight spacing */}
+        <div className="flex justify-center space-x-0.5 w-full mb-2">
           {gameState.ecoZones.map((zone, index) => (
             <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
           ))}
