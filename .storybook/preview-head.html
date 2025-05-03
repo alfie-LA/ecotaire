@@ -1,0 +1,21 @@
+<script>
+  // Fix for "window is not defined" errors in tests and stories
+  window.global = window;
+  
+  // Make sure process is defined for any libraries that expect it
+  window.process = window.process || { env: {} };
+  
+  // Prevent errors with localStorage in some contexts
+  try {
+    localStorage.getItem('test');
+  } catch (e) {
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: () => null,
+        setItem: () => null,
+        removeItem: () => null,
+        clear: () => null,
+      },
+    });
+  }
+</script>

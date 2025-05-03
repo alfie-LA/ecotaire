@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Solitaire Mobile UI Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .card {
+            border-radius: 0.25rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        }
+        .card-mammals { background-color: #fee2e2; }
+        .card-birds { background-color: #dcfce7; }
+        .card-fish { background-color: #dbeafe; }
+        .card-amphibians { background-color: #fef9c3; }
+        .card-reptiles { background-color: #ffedd5; }
+        
+        .phone-frame {
+            width: 375px;
+            height: 667px;
+            border: 16px solid #222;
+            border-radius: 36px;
+            overflow: hidden;
+            position: relative;
+            margin: 2rem auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .tablet-frame {
+            width: 768px;
+            height: 500px;
+            border: 16px solid #222;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            margin: 2rem auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="max-w-5xl mx-auto p-6">
+        <h1 class="text-2xl font-bold mb-6 text-center">Eco-Solitaire Mobile UI Preview</h1>
+        
+        <div class="flex flex-wrap justify-center gap-8">
+            <!-- Portrait Phone Frame -->
+            <div>
+                <h2 class="text-xl font-semibold mb-2 text-center">Portrait Mode</h2>
+                <div class="phone-frame">
+                    <div class="w-full h-full bg-cover bg-center" style="background-color: #f0f0f0; background-image: url('../public/assets/images/eco-bg.png');">
+                        <div class="h-full w-full bg-white/50 px-2 py-1 flex flex-col">
+                            <!-- Score section -->
+                            <div class="grid grid-cols-3 items-center mb-2 py-1 bg-black/30 rounded shadow-md">
+                                <div class="text-center px-1">
+                                    <div class="text-base font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] leading-none">
+                                        125
+                                    </div>
+                                    <div class="text-[8px] font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+                                        Score
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center px-1">
+                                    <div class="text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+                                        🏆250
+                                    </div>
+                                    <div class="text-[8px] font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+                                        High
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center px-1">
+                                    <div class="text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+                                        17
+                                    </div>
+                                    <div class="text-[8px] font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+                                        Moves
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Draw/Discard section -->
+                            <div class="flex justify-center gap-4 mb-2">
+                                <!-- Draw Pile -->
+                                <div class="w-[60px] h-[36px] bg-white/30 backdrop-blur-md border border-gray-400 rounded shadow-md flex flex-col items-center justify-center">
+                                    <img src="../public/assets/icons/draw-pile.png" alt="Draw pile" class="w-6 h-6 object-contain" />
+                                </div>
+                                
+                                <!-- Discard Pile -->
+                                <div class="w-[60px] h-[36px] relative">
+                                    <!-- Showing a discarded card -->
+                                    <div class="card card-mammals w-[60px] h-[36px] border border-orange-500 absolute top-0 left-0 p-1">
+                                        <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">4</div>
+                                        <img src="../public/assets/icons/mammals.png" alt="Mammals" class="w-10 h-10 object-contain" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Game columns -->
+                            <div class="flex-1 flex flex-col justify-between h-full">
+                                <!-- Columns -->
+                                <div class="grid grid-cols-5 gap-2 justify-items-center w-full mb-4">
+                                    <!-- Column 1 -->
+                                    <div class="w-[19%] max-w-[80px] min-h-[50px] border border-dashed border-gray-400 rounded-md p-0.5 flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                        <!-- Stacked cards -->
+                                        <div class="relative mb-[-32px]" style="z-index: 1;">
+                                            <div class="card card-mammals w-[60px] h-[36px] border border-orange-500 p-1">
+                                                <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">3</div>
+                                                <img src="../public/assets/icons/mammals.png" alt="Mammals" class="w-10 h-10 object-contain" />
+                                            </div>
+                                        </div>
+                                        <div class="relative" style="z-index: 2;">
+                                            <div class="card card-mammals w-[60px] h-[36px] border border-yellow-500 p-1">
+                                                <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">2</div>
+                                                <img src="../public/assets/icons/mammals.png" alt="Mammals" class="w-10 h-10 object-contain" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Column 2 -->
+                                    <div class="w-[19%] max-w-[80px] min-h-[50px] border border-dashed border-gray-400 rounded-md p-0.5 flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                        <div class="card card-birds w-[60px] h-[36px] border border-orange-700 p-1">
+                                            <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">8</div>
+                                            <img src="../public/assets/icons/birds.png" alt="Birds" class="w-10 h-10 object-contain" />
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Column 3 -->
+                                    <div class="w-[19%] max-w-[80px] min-h-[50px] border border-dashed border-gray-400 rounded-md p-0.5 flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                        <div class="relative mb-[-32px]" style="z-index: 1;">
+                                            <div class="card card-fish w-[60px] h-[36px] border border-orange-500 p-1">
+                                                <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">5</div>
+                                                <img src="../public/assets/icons/fish.png" alt="Fish" class="w-10 h-10 object-contain" />
+                                            </div>
+                                        </div>
+                                        <div class="relative" style="z-index: 2;">
+                                            <div class="card card-fish w-[60px] h-[36px] border border-orange-500 p-1">
+                                                <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">6</div>
+                                                <img src="../public/assets/icons/fish.png" alt="Fish" class="w-10 h-10 object-contain" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Column 4 -->
+                                    <div class="w-[19%] max-w-[80px] min-h-[50px] border border-dashed border-gray-400 rounded-md p-0.5 flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                        <div class="card card-amphibians w-[60px] h-[36px] border border-yellow-500 p-1">
+                                            <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">2</div>
+                                            <img src="../public/assets/icons/amphibians.png" alt="Amphibians" class="w-10 h-10 object-contain" />
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Column 5 -->
+                                    <div class="w-[19%] max-w-[80px] min-h-[50px] border border-dashed border-gray-400 rounded-md p-0.5 flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                        <div class="relative mb-[-32px]" style="z-index: 1;">
+                                            <div class="card card-reptiles w-[60px] h-[36px] border border-red-800 p-1">
+                                                <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">10</div>
+                                                <img src="../public/assets/icons/reptiles.png" alt="Reptiles" class="w-10 h-10 object-contain" />
+                                            </div>
+                                        </div>
+                                        <div class="relative" style="z-index: 2;">
+                                            <div class="card card-reptiles w-[60px] h-[36px] border border-red-500 p-1">
+                                                <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">9</div>
+                                                <img src="../public/assets/icons/reptiles.png" alt="Reptiles" class="w-10 h-10 object-contain" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- EcoZones -->
+                                <div class="grid grid-cols-5 gap-2 justify-items-center w-full">
+                                    <!-- EcoZone Mammals -->
+                                    <div class="w-[19%] max-w-[80px] min-h-[35px] border border-solid border-gray-400 p-0.5 rounded-md flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                        <img src="../public/assets/icons/mammals.png" alt="Mammals" class="w-12 h-12 mb-0 object-contain drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+                                        <div class="card card-mammals w-[60px] h-[36px] border border-green-600 p-1 mt-1">
+                                            <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">1</div>
+                                            <img src="../public/assets/icons/mammals.png" alt="Mammals" class="w-10 h-10 object-contain" />
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- EcoZone Birds -->
+                                    <div class="w-[19%] max-w-[80px] min-h-[35px] border border-solid border-gray-400 p-0.5 rounded-md flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                        <img src="../public/assets/icons/birds.png" alt="Birds" class="w-12 h-12 mb-0 object-contain drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+                                        <div class="text-gray-300 text-[8px] mt-2">-</div>
+                                    </div>
+                                    
+                                    <!-- EcoZone Fish -->
+                                    <div class="w-[19%] max-w-[80px] min-h-[35px] border border-solid border-gray-400 p-0.5 rounded-md flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                        <img src="../public/assets/icons/fish.png" alt="Fish" class="w-12 h-12 mb-0 object-contain drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+                                        <div class="relative mb-[-32px]" style="z-index: 1;">
+                                            <div class="card card-fish w-[60px] h-[36px] border border-green-600 p-1 mt-1">
+                                                <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">1</div>
+                                                <img src="../public/assets/icons/fish.png" alt="Fish" class="w-10 h-10 object-contain" />
+                                            </div>
+                                        </div>
+                                        <div class="relative" style="z-index: 2;">
+                                            <div class="card card-fish w-[60px] h-[36px] border border-yellow-500 p-1 mt-1">
+                                                <div class="text-[16px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">2</div>
+                                                <img src="../public/assets/icons/fish.png" alt="Fish" class="w-10 h-10 object-contain" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- EcoZone Amphibians -->
+                                    <div class="w-[19%] max-w-[80px] min-h-[35px] border border-solid border-gray-400 p-0.5 rounded-md flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                        <img src="../public/assets/icons/amphibians.png" alt="Amphibians" class="w-12 h-12 mb-0 object-contain drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+                                        <div class="text-gray-300 text-[8px] mt-2">-</div>
+                                    </div>
+                                    
+                                    <!-- EcoZone Reptiles -->
+                                    <div class="w-[19%] max-w-[80px] min-h-[35px] border border-solid border-gray-400 p-0.5 rounded-md flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                        <img src="../public/assets/icons/reptiles.png" alt="Reptiles" class="w-12 h-12 mb-0 object-contain drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+                                        <div class="text-gray-300 text-[8px] mt-2">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Game controls -->
+                            <div class="flex justify-center space-x-4 mt-2 pb-1 h-[40px]">
+                                <button class="bg-blue-600 text-white px-4 py-1 rounded-lg text-lg h-full shadow-md">
+                                    📘
+                                </button>
+                                
+                                <button class="bg-green-600 text-white px-4 py-1 rounded-lg text-lg h-full shadow-md">
+                                    🔄
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Landscape Tablet Frame -->
+            <div>
+                <h2 class="text-xl font-semibold mb-2 text-center">Landscape Mode</h2>
+                <div class="tablet-frame">
+                    <div class="w-full h-full bg-cover bg-center" style="background-color: #f0f0f0; background-image: url('../public/assets/images/eco-bg.png');">
+                        <div class="h-full w-full bg-white/50 p-1 flex flex-col relative">
+                            <!-- Score section -->
+                            <div class="absolute left-1 top-1/2 transform -translate-y-1/2 z-10 grid grid-rows-3 grid-cols-1 bg-black/30 rounded p-1 shadow-md">
+                                <div class="text-center px-1 mb-1">
+                                    <div class="text-base font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] leading-none">
+                                        125
+                                    </div>
+                                    <div class="text-[8px] font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+                                        Score
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center px-1 mb-1">
+                                    <div class="text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+                                        🏆250
+                                    </div>
+                                    <div class="text-[8px] font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+                                        High
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center px-1">
+                                    <div class="text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+                                        17
+                                    </div>
+                                    <div class="text-[8px] font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+                                        Moves
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Main content area -->
+                            <div class="flex-1 flex flex-row pl-8 gap-0 justify-start h-full">
+                                <!-- Left section - Draw/Discard pile -->
+                                <div class="flex justify-center items-start pt-2 mr-1">
+                                    <div class="flex flex-col gap-2">
+                                        <!-- Draw Pile -->
+                                        <div class="w-[45px] h-[48px] bg-white/30 backdrop-blur-md border border-gray-400 rounded-md shadow-md flex items-center justify-center">
+                                            <img src="../public/assets/icons/draw-pile.png" alt="Draw pile" class="w-6 h-6 object-contain" />
+                                        </div>
+                                        
+                                        <!-- Discard Pile -->
+                                        <div class="w-[45px] h-[48px] relative">
+                                            <div class="card card-mammals w-[45px] h-[36px] border border-orange-500 p-1 absolute top-0 left-0">
+                                                <div class="text-[12px] font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">4</div>
+                                                <img src="../public/assets/icons/mammals.png" alt="Mammals" class="w-8 h-8 object-contain" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Game area -->
+                                <div class="flex-1 flex flex-col justify-between h-full py-0 pl-0">
+                                    <!-- Columns -->
+                                    <div class="grid grid-cols-5 gap-1 justify-items-center w-full mx-0">
+                                        <!-- 5 Columns -->
+                                        <div class="w-[19%] max-w-[80px] min-h-[160px] border border-dashed border-gray-400 rounded-md p-0.5 flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                            <!-- Example card -->
+                                            <div class="card card-mammals w-[45px] h-[36px] border border-green-600 p-1">
+                                                <div class="text-[12px] font-bold">1</div>
+                                                <img src="../public/assets/icons/mammals.png" alt="Mammals" class="w-8 h-8 object-contain" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="w-[19%] max-w-[80px] min-h-[160px] border border-dashed border-gray-400 rounded-md p-0.5 flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                            <!-- Column content -->
+                                        </div>
+                                        
+                                        <div class="w-[19%] max-w-[80px] min-h-[160px] border border-dashed border-gray-400 rounded-md p-0.5 flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                            <!-- Column content -->
+                                        </div>
+                                        
+                                        <div class="w-[19%] max-w-[80px] min-h-[160px] border border-dashed border-gray-400 rounded-md p-0.5 flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                            <!-- Column content -->
+                                        </div>
+                                        
+                                        <div class="w-[19%] max-w-[80px] min-h-[160px] border border-dashed border-gray-400 rounded-md p-0.5 flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                            <!-- Column content -->
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Small gap -->
+                                    <div class="h-1"></div>
+                                    
+                                    <!-- EcoZones -->
+                                    <div class="grid grid-cols-5 gap-1 justify-items-center w-full mx-0 mb-0">
+                                        <!-- 5 EcoZones -->
+                                        <div class="w-[19%] max-w-[80px] min-h-[120px] border border-solid border-gray-400 p-0.5 rounded-md flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                            <img src="../public/assets/icons/mammals.png" alt="Mammals" class="w-8 h-8 object-contain" />
+                                            <!-- Zone content -->
+                                        </div>
+                                        
+                                        <div class="w-[19%] max-w-[80px] min-h-[120px] border border-solid border-gray-400 p-0.5 rounded-md flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                            <img src="../public/assets/icons/birds.png" alt="Birds" class="w-8 h-8 object-contain" />
+                                            <!-- Zone content -->
+                                        </div>
+                                        
+                                        <div class="w-[19%] max-w-[80px] min-h-[120px] border border-solid border-gray-400 p-0.5 rounded-md flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                            <img src="../public/assets/icons/fish.png" alt="Fish" class="w-8 h-8 object-contain" />
+                                            <!-- Zone content -->
+                                        </div>
+                                        
+                                        <div class="w-[19%] max-w-[80px] min-h-[120px] border border-solid border-gray-400 p-0.5 rounded-md flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                            <img src="../public/assets/icons/amphibians.png" alt="Amphibians" class="w-8 h-8 object-contain" />
+                                            <!-- Zone content -->
+                                        </div>
+                                        
+                                        <div class="w-[19%] max-w-[80px] min-h-[120px] border border-solid border-gray-400 p-0.5 rounded-md flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                                            <img src="../public/assets/icons/reptiles.png" alt="Reptiles" class="w-8 h-8 object-contain" />
+                                            <!-- Zone content -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Game controls -->
+                            <div class="absolute right-2 top-2 flex flex-col space-y-2">
+                                <button class="bg-blue-600 text-white w-8 h-8 rounded flex items-center justify-center shadow-md">
+                                    📘
+                                </button>
+                                
+                                <button class="bg-green-600 text-white w-8 h-8 rounded flex items-center justify-center shadow-md">
+                                    🔄
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-8 p-4 bg-white rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">Mobile UI Components</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Card Components -->
+                <div class="p-4 border rounded-md">
+                    <h3 class="text-lg font-semibold mb-2">Cards</h3>
+                    <div class="space-y-2">
+                        <div class="card card-mammals w-[60px] h-[36px] border border-green-600 p-1">
+                            <div class="text-[16px] font-bold">1</div>
+                            <img src="../public/assets/icons/mammals.png" alt="Mammals" class="w-10 h-10 object-contain" />
+                        </div>
+                        
+                        <div class="card card-birds w-[60px] h-[36px] border border-yellow-500 p-1">
+                            <div class="text-[16px] font-bold">2</div>
+                            <img src="../public/assets/icons/birds.png" alt="Birds" class="w-10 h-10 object-contain" />
+                        </div>
+                        
+                        <div class="card card-fish w-[60px] h-[36px] border border-orange-500 p-1">
+                            <div class="text-[16px] font-bold">6</div>
+                            <img src="../public/assets/icons/fish.png" alt="Fish" class="w-10 h-10 object-contain" />
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Column -->
+                <div class="p-4 border rounded-md">
+                    <h3 class="text-lg font-semibold mb-2">Column</h3>
+                    <div class="w-[70px] min-h-[120px] border border-dashed border-gray-400 rounded-md p-0.5 flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                        <div class="relative mb-[-32px]" style="z-index: 1;">
+                            <div class="card card-fish w-[60px] h-[36px] border border-orange-500 p-1">
+                                <div class="text-[16px] font-bold">5</div>
+                                <img src="../public/assets/icons/fish.png" alt="Fish" class="w-10 h-10 object-contain" />
+                            </div>
+                        </div>
+                        <div class="relative" style="z-index: 2;">
+                            <div class="card card-fish w-[60px] h-[36px] border border-orange-500 p-1">
+                                <div class="text-[16px] font-bold">6</div>
+                                <img src="../public/assets/icons/fish.png" alt="Fish" class="w-10 h-10 object-contain" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- EcoZone -->
+                <div class="p-4 border rounded-md">
+                    <h3 class="text-lg font-semibold mb-2">EcoZone</h3>
+                    <div class="w-[70px] min-h-[120px] border border-solid border-gray-400 p-0.5 rounded-md flex flex-col items-center bg-white/30 backdrop-blur-md shadow-md">
+                        <img src="../public/assets/icons/mammals.png" alt="Mammals" class="w-12 h-12 mb-0 object-contain drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+                        <div class="card card-mammals w-[60px] h-[36px] border border-green-600 p-1 mt-1">
+                            <div class="text-[16px] font-bold">1</div>
+                            <img src="../public/assets/icons/mammals.png" alt="Mammals" class="w-10 h-10 object-contain" />
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Deck -->
+                <div class="p-4 border rounded-md">
+                    <h3 class="text-lg font-semibold mb-2">Deck</h3>
+                    <div class="flex gap-4">
+                        <div class="w-[60px] h-[36px] bg-white/30 backdrop-blur-md border border-gray-400 rounded shadow-md flex flex-col items-center justify-center">
+                            <img src="../public/assets/icons/draw-pile.png" alt="Draw pile" class="w-6 h-6 object-contain" />
+                        </div>
+                        
+                        <div class="w-[60px] h-[36px] bg-gray-200 border border-gray-400 flex items-center justify-center text-[10px] text-gray-500 rounded-md shadow-md">
+                            -
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
