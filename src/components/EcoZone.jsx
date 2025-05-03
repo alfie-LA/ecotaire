@@ -1,9 +1,9 @@
-// Fixed EcoZone.jsx
+// components/EcoZone.jsx
 import React from 'react';
 import { useDrop } from 'react-dnd';
 import Card from './Card';
 
-// Class → Background color
+// Class → Background color (for visual feedback only)
 const getClassBackground = (animalClass) => {
   switch (animalClass) {
     case 'Mammals': return 'bg-red-100';
@@ -36,23 +36,49 @@ const EcoZone = ({ zone, onDropToZone }) => {
     }),
   }), [zone]);
 
-  const bgColor = getClassBackground(zone.className);
   const iconSrc = getClassIconPath(zone.className);
+
+  // Hard-coded inline style that cannot be overridden by CSS
+  const exactZoneStyle = {
+    width: '55px',
+    minWidth: '55px',
+    maxWidth: '70px',
+    height: '140px',
+    minHeight: '140px',
+    overflow: 'hidden',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: '#9ca3af', // gray-400
+    borderRadius: '0.375rem', // rounded-md
+    padding: '2px', // p-0.5
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)', // bg-white/50
+    boxSizing: 'border-box'
+  };
+
+  // Hard-coded icon style
+  const iconStyle = {
+    width: '32px',
+    height: '32px',
+    marginBottom: '0',
+    objectFit: 'contain',
+    filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.3))'
+  };
 
   return (
     <div
       ref={drop}
-      className={`EcoZone w-[20%] !w-[20%] min-w-[60px] !min-w-[60px] max-w-[70px] !max-w-[70px] sm:w-16 md:w-24 min-h-[140px] sm:min-h-[200px] md:min-h-[280px] landscape:min-h-[150px] overflow-hidden border border-solid border-gray-400 p-0.5 sm:p-1 md:p-2 rounded-md sm:rounded flex flex-col items-center 
-        bg-white/60 sm:bg-white/30 backdrop-blur-md shadow-md sm:shadow-md transition duration-300 ease-in-out
-        ${isOver && canDrop ? 'ring-2 sm:ring-4 ring-green-400 animate-pulse' : ''}
-        ${!isOver && canDrop ? 'ring-2 sm:ring-2 ring-green-200' : ''}`}
-      style={{ width: '20%', minWidth: '60px', maxWidth: '70px', outline: '0' }}
+      className={`EcoZone ${isOver && canDrop ? 'ring-2 ring-green-400 animate-pulse' : ''} ${!isOver && canDrop ? 'ring-2 ring-green-200' : ''}`}
+      style={exactZoneStyle}
     >
-      {/* Class icon header stays fixed - reduced spacing */}
+      {/* Class icon header stays fixed */}
       <img
         src={iconSrc}
         alt={zone.className}
-        className="w-8 h-8 sm:w-12 sm:h-12 landscape:w-8 landscape:h-8 mb-0 sm:mb-2 object-contain drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]"
+        className="object-contain"
+        style={iconStyle}
         loading="lazy"
         onError={(e) => {
           e.target.onerror = null;
@@ -60,13 +86,20 @@ const EcoZone = ({ zone, onDropToZone }) => {
         }}
       />
 
-      {/* Card Stack container with minimal top margin in portrait */}
-      <div className="mt-0 sm:mt-8 md:mt-16 landscape:mt-4 relative w-full flex flex-col items-center">
+      {/* Card Stack container with minimal top margin */}
+      <div className="relative w-full flex flex-col items-center" style={{ marginTop: '0' }}>
         {zone.cards.length === 0 ? (
-          <div className="text-gray-300 text-[8px] sm:text-sm mt-0 sm:mt-20 landscape:mt-10">-</div>
+          <div className="text-gray-300 text-[8px] mt-0">-</div>
         ) : (
           zone.cards.map((card, i) => (
-            <div key={card.id} className="mb-[-32px] sm:mb-[-60px] landscape:mb-[-50px] relative" style={{ zIndex: i }}>
+            <div 
+              key={card.id} 
+              className="relative" 
+              style={{ 
+                marginBottom: i < zone.cards.length - 1 ? '-32px' : '0',
+                zIndex: i 
+              }}
+            >
               <Card card={card} isTop={i === zone.cards.length - 1} />
             </div>
           ))

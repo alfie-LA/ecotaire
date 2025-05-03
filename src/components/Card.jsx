@@ -1,5 +1,5 @@
-// Fixed Card.jsx component
-import React, { useState, useEffect } from 'react';
+// components/Card.jsx
+import React from 'react';
 import { useDrag } from 'react-dnd';
 
 // Rank → Border color
@@ -33,11 +33,6 @@ const getClassIconPath = (animalClass) => {
 const Card = ({ card, isTop, onClick, shakeCardId }) => {
   if (!card) return null;
 
-  // Force cards to be wider than tall in ALL orientations with !important flags
-  // and explicit fixed dimensions
-  const cardSizeClasses = 
-    'Card min-w-[60px] !min-w-[60px] max-h-[40px] !max-h-[40px] w-[60px] !w-[60px] h-[40px] !h-[40px] sm:w-16 md:w-20 sm:h-24 md:h-28';
-
   const border = getRankBorder(card.rank);
   const bg = getClassBackground(card.class || card.className);
   const iconSrc = getClassIconPath(card.class || card.className);
@@ -57,42 +52,76 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
     }
   };
 
+  // Hard-coded inline style that cannot be overridden by CSS
+  const exactCardStyle = {
+    width: '60px',
+    height: '40px',
+    minWidth: '60px',
+    maxWidth: '60px',
+    minHeight: '40px',
+    maxHeight: '40px',
+    display: 'block',
+    boxSizing: 'border-box'
+  };
+
+  // Hard-coded content style
+  const innerContentStyle = {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '4px'
+  };
+
+  // Hard-coded icon style
+  const iconStyle = {
+    width: '32px',
+    height: '32px',
+    objectFit: 'contain'
+  };
+
+  // Hard-coded rank style
+  const rankStyle = {
+    fontSize: '16px',
+    fontWeight: 'bold'
+  };
+
   return (
     <div
       ref={isTop ? drag : null}
       onClick={handleClick}
-      className={`${cardSizeClasses} rounded-md sm:rounded shadow-sm sm:shadow-md z-10 relative border border ${border} ${
+      className={`Card rounded-md shadow-sm border ${border} ${
         card.faceUp ? `${bg} text-black` : 'bg-gray-700'
       } ${isDragging ? 'opacity-50' : ''} cursor-pointer ${shakeCardId === card.id ? 'animate-shake' : ''}`}
-      style={{ width: '60px', height: '40px', minWidth: '60px', maxHeight: '40px' }}
+      style={exactCardStyle}
     >
       {card.faceUp ? (
-        <div className="w-full h-full relative">
-          {/* Force horizontal layout with flexbox and inline style */}
-          <div 
-            className="flex items-center justify-between w-full h-full p-1 !flex-row"
-            style={{ display: 'flex', flexDirection: 'row' }}
-          >
-            <div className="text-[16px] sm:text-xs md:text-base font-bold drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)]">
+        <div style={{ width: '100%', height: '100%' }}>
+          <div style={innerContentStyle}>
+            <div style={rankStyle}>
               {card.rank}
             </div>
             
             <img
               src={iconSrc}
               alt={card.class}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 object-contain"
+              style={iconStyle}
               loading="lazy"
             />
           </div>
-
-          {/* Bottom-right rank (mirrored) - hidden on mobile */}
-          <div className="absolute bottom-0 right-0 text-[7px] sm:text-xs md:text-base font-bold transform rotate-180 hidden sm:block">
-            {card.rank}
-          </div>
         </div>
       ) : (
-        <div className="w-full h-full flex items-center justify-center text-gray-400 text-[10px] sm:text-xl"
-             style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: '#9ca3af',
+          fontSize: '10px'
+        }}>
           🂠
         </div>
       )}

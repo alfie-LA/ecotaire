@@ -34,10 +34,18 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
 
   return (
     <div className="flex justify-center gap-4 sm:gap-4 md:gap-6 landscape:gap-2 items-start">
-      {/* Draw Pile - ultra compact height in portrait mobile */}
+      {/* Draw Pile - exact 60x40px dimensions */}
       <div
         onClick={onDrawCard}
-        className="relative w-[60px] h-[40px] sm:w-14 md:w-20 landscape:w-14 sm:h-24 md:h-28 landscape:h-20 cursor-pointer flex flex-col items-center justify-center bg-white/30 backdrop-blur-md border border-gray-400 rounded-md sm:rounded shadow-md sm:shadow-md hover:ring-2 sm:hover:ring-2 hover:ring-green-400 transition"
+        className="relative cursor-pointer flex flex-col items-center justify-center bg-white/30 backdrop-blur-md border border-gray-400 rounded-md shadow-md hover:ring-2 hover:ring-green-400 transition"
+        style={{
+          width: '60px',
+          height: '40px',
+          minWidth: '60px',
+          maxWidth: '60px',
+          minHeight: '40px',
+          maxHeight: '40px'
+        }}
         title={showRecycle ? 'Recycle' : drawPile.length > 0 ? 'Click to draw' : ''}
       >
         {showRecycle ? (
@@ -64,8 +72,15 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
         )}
       </div>
 
-      {/* Discard Pile — shows up to 3 stacked cards with more width */}
-      <div className="relative w-[60px] h-[40px] sm:w-14 md:w-20 landscape:w-14 sm:h-24 md:h-28 landscape:h-20">
+      {/* Discard Pile — exact 60x40px dimensions */}
+      <div className="relative" style={{
+          width: '60px',
+          height: '40px',
+          minWidth: '60px',
+          maxWidth: '60px',
+          minHeight: '40px',
+          maxHeight: '40px'
+        }}>
         {visibleDiscards.map((card, idx) => (
           <div
             key={card.id}
@@ -83,7 +98,19 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
         ))}
 
         {visibleDiscards.length === 0 && (
-          <div className="w-full h-full bg-white/30 border border-gray-400 flex items-center justify-center text-[10px] sm:text-sm text-gray-500 rounded-md sm:rounded shadow-md">
+          <div style={{
+            width: '60px',
+            height: '40px',
+            backgroundColor: 'rgba(255, 255, 255, 0.3)',
+            border: '1px solid #9ca3af',
+            borderRadius: '0.375rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '10px',
+            color: '#6b7280',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+          }}>
             -
           </div>
         )}

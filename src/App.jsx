@@ -9,19 +9,49 @@ import { initializeGame } from './utils/gameUtils';
 const App = () => {
   // Add inline critical CSS to ensure card dimensions
   useEffect(() => {
-    // Add critical CSS styles directly to the document head
+    // Add critical CSS styles directly to the document head with exact pixel specs
     const style = document.createElement('style');
     style.innerHTML = `
+      /* Exact specs from mobile-ui-sizing.html */
       .Card, [class*="Card"] {
         width: 60px !important;
         height: 40px !important;
         min-width: 60px !important;
+        max-width: 60px !important;
+        min-height: 40px !important;
         max-height: 40px !important;
+        box-sizing: border-box !important;
       }
       
       .Card > div > div, [class*="Card"] > div > div {
         display: flex !important;
         flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 4px !important;
+      }
+
+      .Card img {
+        width: 32px !important;
+        height: 32px !important;
+      }
+
+      .Column {
+        width: 55px !important;
+        height: 190px !important;
+        min-width: 55px !important;
+        max-width: 70px !important;
+      }
+
+      .EcoZone {
+        width: 55px !important;
+        height: 140px !important;
+        min-width: 55px !important;
+        max-width: 70px !important;
+      }
+
+      .Column > div {
+        margin-bottom: -32px !important;
       }
     `;
     document.head.appendChild(style);
