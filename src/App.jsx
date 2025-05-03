@@ -51,7 +51,7 @@ const App = () => {
       }
 
       .Column > div {
-        margin-bottom: -32px !important;
+        margin-bottom: -20px !important;
       }
     `;
     document.head.appendChild(style);

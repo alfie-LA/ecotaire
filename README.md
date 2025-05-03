@@ -98,7 +98,7 @@ The mobile UI was developed with specific pixel-perfect requirements:
 - **Cards:** 60px × 40px (width × height)
 - **Columns:** 55px × 190px
 - **EcoZones:** 55px × 140px
-- **Card Stacking:** -32px overlap
+- **Card Stacking:** -20px overlap
 - **Fixed Sections:**
   - Score section: 40px height
   - Draw/Discard pile: 50px height

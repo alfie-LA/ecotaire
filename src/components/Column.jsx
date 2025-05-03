@@ -43,7 +43,7 @@ const Column = ({ cards, columnIndex, onCardDrop, onCardClick, shakeCardId }) =>
             <div
               key={card.id}
               className="relative"
-              style={{ marginBottom: i < cards.length - 1 ? '-32px' : '0', zIndex: i }}
+              style={{ marginBottom: i < cards.length - 1 ? '-20px' : '0', zIndex: i }}
             >
               <Card
                 key={card.id}
