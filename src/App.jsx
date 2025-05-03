@@ -382,85 +382,32 @@ const App = () => {
 
   // Choose layout based on device and orientation
   return (
-    <div className="min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden"
-      style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}>
-      <div className="w-full max-w-7xl mx-auto px-1 sm:px-4 bg-white/30 rounded-xl shadow-lg py-2 sm:py-6">
-
-        {/* Simple score header */}
-        <div className="text-center mb-2">
-          <div className="text-lg sm:text-3xl font-bold text-white drop-shadow-lg">
-            Score: {animatedScore} | 🏆 High: {highScore} | Moves: {gameState.moves}
+    <>
+      {windowOrientation === 'landscape' && isMobile 
+        ? mobileLandscapeLayout 
+        : regularLayout}
+        
+      {showHowToPlay && 
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-4 sm:p-6 max-w-md w-full shadow-lg relative">
+            <h2 className="text-lg sm:text-xl font-bold mb-3 text-green-700">🌱 How to Play Eco-Solitaire</h2>
+            <ul className="list-disc ml-4 sm:ml-5 space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-800">
+              <li>Sort species into the correct Eco-Zone by class (Mammals, Birds, etc.).</li>
+              <li>Cards must be placed in order from rank 1 (Least Concern) to 10 (Critically Endangered).</li>
+              <li>Use the draw and discard piles to cycle through available cards.</li>
+              <li>Click a card to automatically move it to a valid column or zone.</li>
+              <li>Restore all 5 zones to win!</li>
+            </ul>
+            <button
+              onClick={() => setShowHowToPlay(false)}
+              className="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-lg"
+            >
+              ✖
+            </button>
           </div>
         </div>
-
-        {/* Deck */}
-        <div className="flex justify-center my-2">
-          <Deck
-            drawPile={gameState.drawPile}
-            discardPile={gameState.discardPile.slice(-3)}
-            onDrawCard={handleDrawCard}
-            onCardClick={handleCardClick}
-          />
-        </div>
-
-        {/* Game Columns - simplified & tight spacing */}
-        <div className="flex justify-center space-x-0.5 w-full mb-2">
-          {gameState.columns.map((columnCards, index) => (
-            <Column
-              key={index}
-              columnIndex={index}
-              cards={columnCards}
-              onCardDrop={(card) => handleDropToColumn(card, index)}
-              onCardClick={handleCardClick}
-            />
-          ))}
-        </div>
-
-        {/* EcoZones - simplified & tight spacing */}
-        <div className="flex justify-center space-x-0.5 w-full mb-2">
-          {gameState.ecoZones.map((zone, index) => (
-            <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
-          ))}
-        </div>
-
-        {/* Simplified buttons */}
-        <div className="flex justify-center gap-2">
-          <button 
-            className="bg-blue-500 text-white px-2 py-1 rounded" 
-            onClick={() => setShowHowToPlay(true)}
-          >
-            📘
-          </button>
-          <button 
-            className="bg-green-600 text-white px-2 py-1 rounded" 
-            onClick={handleNewGame}
-          >
-            🔄
-          </button>
-        </div>
-      </div>
-      
-      {showHowToPlay && 
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-    <div className="bg-white rounded-lg p-4 sm:p-6 max-w-md w-full shadow-lg relative">
-      <h2 className="text-lg sm:text-xl font-bold mb-3 text-green-700">🌱 How to Play Eco-Solitaire</h2>
-      <ul className="list-disc ml-4 sm:ml-5 space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-800">
-        <li>Sort species into the correct Eco-Zone by class (Mammals, Birds, etc.).</li>
-        <li>Cards must be placed in order from rank 1 (Least Concern) to 10 (Critically Endangered).</li>
-        <li>Use the draw and discard piles to cycle through available cards.</li>
-        <li>Click a card to automatically move it to a valid column or zone.</li>
-        <li>Restore all 5 zones to win!</li>
-      </ul>
-      <button
-        onClick={() => setShowHowToPlay(false)}
-        className="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-lg"
-      >
-        ✖
-      </button>
-    </div>
-  </div>
-}
-    </div>
+      }
+    </>
   );
 };
 
