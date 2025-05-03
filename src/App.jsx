@@ -448,7 +448,7 @@ const App = () => {
              height: 'auto', 
              minHeight: 'min-content',
              marginTop: '20vh' /* Move panel down to align with character's chin */
-           }}
+           }}>
         
         {/* Score section - fixed 40px height */}
         <div className="grid grid-cols-3 items-center bg-black/30 rounded shadow-md" style={{ height: '40px', marginBottom: '8px' }}>
