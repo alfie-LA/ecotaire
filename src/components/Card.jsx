@@ -1,6 +1,6 @@
 
 // components/Card.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 
 // Rank → Border color
@@ -34,9 +34,28 @@ const getClassIconPath = (animalClass) => {
 const Card = ({ card, isTop, onClick, shakeCardId }) => {
   if (!card) return null;
 
+  const [orientation, setOrientation] = useState(
+    window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
+  );
+
+  // Listen for orientation changes
+  useEffect(() => {
+    const handleResize = () => {
+      setOrientation(window.innerWidth > window.innerHeight ? 'landscape' : 'portrait');
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const border = getRankBorder(card.rank);
   const bg = getClassBackground(card.class || card.className);
   const iconSrc = getClassIconPath(card.class || card.className);
+
+  // Adjust sizing for landscape
+  const cardSizeClasses = orientation === 'landscape' && window.innerHeight < 500
+    ? 'w-3 h-5 sm:w-14 md:w-16 sm:h-16 md:h-20' // Smaller in landscape
+    : 'w-4 h-7 sm:w-16 md:w-20 sm:h-24 md:h-28'; // Original sizes
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CARD',
@@ -57,7 +76,7 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
     <div
       ref={isTop ? drag : null}
       onClick={handleClick}
-      className={`w-8 h-12 md:w-20 md:h-28 rounded shadow-sm mb-[-60px] z-10 relative border-2 ${border} ${
+      className={`${cardSizeClasses} rounded-none sm:rounded shadow-none sm:shadow-md mb-[-40px] sm:mb-[-60px] landscape:mb-[-35px] z-10 relative border-0 sm:border-2 ${border} ${
         card.faceUp ? `${bg} text-black` : 'bg-gray-700'
       } ${isDragging ? 'opacity-50' : ''} cursor-pointer ${shakeCardId === card.id ? 'animate-shake' : ''}`}
     >
@@ -73,7 +92,7 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
             <img
               src={iconSrc}
               alt={card.class}
-              className="w-2 h-2 sm:w-8 sm:h-8 md:w-13 md:h-13 object-contain"
+              className="w-4 h-4 sm:w-8 sm:h-8 md:w-13 md:h-13 object-contain"
               loading="lazy"
             />
           </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import Card from './Card';
 
@@ -18,28 +18,39 @@ const Column = ({ cards, columnIndex, onCardDrop, onCardClick, shakeCardId }) =>
   return (
     <div
       ref={drop}
-      className={`w-14 min-h-[200px] overflow-hidden border border-dashed border-gray-300 
-        rounded p-0 flex flex-col items-center transition duration-200 
-        backdrop-blur-md bg-white/30 shadow-md ${isOver ? 'ring-2 ring-green-400' : ''}`}
+      className={`w-3 sm:w-16 md:w-24 min-h-[70px] sm:min-h-[250px] md:min-h-[350px] landscape:min-h-[200px] overflow-hidden border-0 sm:border sm:border-dashed sm:border-gray-300 
+        rounded-sm sm:rounded p-0 sm:p-1 flex flex-col items-center transition duration-200 
+        backdrop-blur-md bg-white/20 sm:bg-white/30 shadow-sm sm:shadow-md ${isOver ? 'ring-1 sm:ring-2 ring-green-400' : ''}`}
+      style={{ outline: '0 sm:1px dashed transparent sm:blue' }}
     >
       {cards.length === 0 ? (
-        <div className="text-gray-300 mt-5 sm:mt-24 text-[8px] sm:text-sm">-</div>
+        <div className="text-gray-300 mt-5 sm:mt-24 landscape:mt-10 text-[8px] sm:text-sm">-</div>
       ) : (
-        cards.map((card, i) => (
-          <div
-             key={card.id}
-             className={`relative ${card.faceUp ? 'mb-[-52px] sm:mb-[-60px]' : 'mb-[-52px] sm:mb-[-60px]'}`}
+        cards.map((card, i) => {
+          // Determine if we're in landscape orientation and screen is short
+          const isCompactLandscape = window.innerWidth > window.innerHeight && window.innerHeight < 500;
+          
+          // Use more compact spacing in landscape mode and tighter in portrait for mobile
+          const marginClass = isCompactLandscape
+            ? card.faceUp ? 'mb-[-60px] sm:mb-[-45px]' : 'mb-[-60px] sm:mb-[-45px]'
+            : card.faceUp ? 'mb-[-58px] sm:mb-[-20px]' : 'mb-[-58px] sm:mb-[-20px]';
+            
+          return (
+            <div
+              key={card.id}
+              className={`relative ${marginClass}`}
               style={{ zIndex: i }}
-          >
-          <Card
-            key={card.id}
-            card={card}
-            isTop={i === cards.length - 1}
-            onClick={onCardClick}
-            shakeCardId={shakeCardId}
-          />
-          </div>
-        ))
+            >
+              <Card
+                key={card.id}
+                card={card}
+                isTop={i === cards.length - 1}
+                onClick={onCardClick}
+                shakeCardId={shakeCardId}
+              />
+            </div>
+          );
+        })
       )}
     </div>
   );
