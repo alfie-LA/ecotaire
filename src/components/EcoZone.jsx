@@ -42,7 +42,7 @@ const EcoZone = ({ zone, onDropToZone }) => {
   return (
     <div
       ref={drop}
-      className={`w-3 sm:w-16 md:w-24 min-h-[35px] sm:min-h-[200px] md:min-h-[280px] landscape:min-h-[150px] overflow-hidden border-0 sm:border p-0 sm:p-1 md:p-2 rounded-sm sm:rounded flex flex-col items-center 
+      className={`w-[72px] sm:w-16 md:w-24 min-h-[35px] sm:min-h-[200px] md:min-h-[280px] landscape:min-h-[150px] overflow-hidden border-0 sm:border p-0 sm:p-1 md:p-2 rounded-sm sm:rounded flex flex-col items-center 
         bg-white/20 sm:bg-white/30 backdrop-blur-md shadow-sm sm:shadow-md transition duration-300 ease-in-out
         ${isOver && canDrop ? 'ring-1 sm:ring-4 ring-green-400 animate-pulse' : ''}
         ${!isOver && canDrop ? 'ring-1 sm:ring-2 ring-green-200' : ''}`}
@@ -52,7 +52,7 @@ const EcoZone = ({ zone, onDropToZone }) => {
       <img
         src={iconSrc}
         alt={zone.className}
-        className="w-6 h-6 sm:w-12 sm:h-12 landscape:w-8 landscape:h-8 mb-0 sm:mb-2 object-contain"
+        className="w-10 h-10 sm:w-12 sm:h-12 landscape:w-8 landscape:h-8 mb-0 sm:mb-2 object-contain"
         loading="lazy"
         onError={(e) => {
           e.target.onerror = null;
@@ -66,7 +66,7 @@ const EcoZone = ({ zone, onDropToZone }) => {
           <div className="text-gray-300 text-[8px] sm:text-sm mt-0 sm:mt-20 landscape:mt-10">-</div>
         ) : (
           zone.cards.map((card, i) => (
-            <div key={card.id} className="mb-[-70px] sm:mb-[-60px] landscape:mb-[-50px] relative" style={{ zIndex: i }}>
+            <div key={card.id} className="mb-[-80px] sm:mb-[-60px] landscape:mb-[-50px] relative" style={{ zIndex: i }}>
               <Card card={card} isTop={i === zone.cards.length - 1} />
             </div>
           ))
