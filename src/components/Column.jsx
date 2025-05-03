@@ -29,7 +29,7 @@ const Column = ({ cards, columnIndex, onCardDrop, onCardClick, shakeCardId }) =>
         cards.map((card, i) => (
           <div
              key={card.id}
-             className={`relative ${card.faceUp ? 'mb-[-52px] sm:mb-[-20px]' : 'mb-[-52px] sm:mb-[-20px]'}`}
+             className={`relative ${card.faceUp ? 'mb-[-52px] sm:mb-[-60px]' : 'mb-[-52px] sm:mb-[-60px]'}`}
               style={{ zIndex: i }}
           >
           <Card
