@@ -442,85 +442,80 @@ const App = () => {
       className="h-[100svh] w-screen bg-cover bg-center bg-no-repeat overflow-hidden"
       style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}
     >
-      <div className="h-full w-full max-w-[1300px] mx-auto px-2 sm:px-4 bg-white/50 rounded-none sm:rounded-xl shadow-lg py-2 sm:py-6 flex flex-col">
+      {/* Fixed layout with no gap - follows mobile-ui-sizing.html specs exactly */}
+      <div className="w-full max-w-[320px] mx-auto px-2 bg-white/50 py-2 flex flex-col" style={{ height: 'auto', minHeight: 'min-content' }}>
         
-        {/* Score section - extremely compact in portrait mode */}
-        <div className={`grid ${windowOrientation === 'landscape' ? 'landscape:grid-rows-3 landscape:grid-cols-1 landscape:absolute landscape:left-1 landscape:top-1/2 landscape:transform landscape:-translate-y-1/2 landscape:z-10' : 'grid-cols-3'} items-center mb-2 sm:mb-4 py-1 bg-black/30 rounded shadow-md`}>
+        {/* Score section - fixed 40px height */}
+        <div className="grid grid-cols-3 items-center bg-black/30 rounded shadow-md" style={{ height: '40px', marginBottom: '8px' }}>
           <div className="text-center px-1">
-            <div className="text-base sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] leading-none">
+            <div className="text-base font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] leading-none">
               {animatedScore}
             </div>
-            <div className="text-[8px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+            <div className="text-[8px] font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
               Score
             </div>
           </div>
           
           <div className="text-center px-1">
-            <div className="text-sm sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+            <div className="text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
               🏆{highScore}
             </div>
-            <div className="text-[8px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+            <div className="text-[8px] font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
               High
             </div>
           </div>
           
           <div className="text-center px-1">
-            <div className="text-sm sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+            <div className="text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
               {gameState.moves}
             </div>
-            <div className="text-[8px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+            <div className="text-[8px] font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
               Moves
             </div>
           </div>
         </div>
 
-        {/* Main content area - compact for vertical, optimized for landscape on small screens */}
-        <div className={`flex-1 flex ${windowOrientation === 'landscape' ? 'flex-row landscape:pl-8' : 'flex-col'} gap-0 sm:gap-4 justify-start h-full ${windowOrientation !== 'landscape' ? 'mt-0' : ''}`}>
-          {/* Left section - Draw/Discard pile */}
-          <div className={`flex justify-center items-center mr-0 sm:mr-0 ${windowOrientation === 'landscape' ? 'landscape:items-start landscape:pt-2' : 'mb-0'}`}>
-            <Deck
-              drawPile={gameState.drawPile}
-              discardPile={gameState.discardPile.slice(-3)}
-              onDrawCard={handleDrawCard}
+        {/* Draw/Discard pile - fixed 50px height */}
+        <div className="flex justify-center items-center" style={{ height: '50px', marginBottom: '8px' }}>
+          <Deck
+            drawPile={gameState.drawPile}
+            discardPile={gameState.discardPile.slice(-3)}
+            onDrawCard={handleDrawCard}
+            onCardClick={handleCardClick}
+          />
+        </div>
+
+        {/* Columns - fixed 200px height */}
+        <div className="grid grid-cols-5 gap-1 justify-items-center w-full" style={{ height: '200px', marginBottom: '8px' }}>
+          {gameState.columns.map((columnCards, index) => (
+            <Column
+              key={index}
+              columnIndex={index}
+              cards={columnCards}
+              onCardDrop={(card) => handleDropToColumn(card, index)}
               onCardClick={handleCardClick}
             />
-          </div>
+          ))}
+        </div>
 
-          {/* Right section for game columns and eco zones - more compact spacing */}
-          <div className="flex-1 flex flex-col justify-between h-full py-0 pl-0 sm:pl-0">
-            {/* Columns */}
-            <div className="grid grid-cols-5 gap-2 sm:gap-0 justify-items-center w-full mx-0 sm:mx-0 mb-3">
-              {gameState.columns.map((columnCards, index) => (
-                <Column
-                  key={index}
-                  columnIndex={index}
-                  cards={columnCards}
-                  onCardDrop={(card) => handleDropToColumn(card, index)}
-                  onCardClick={handleCardClick}
-                />
-              ))}
-            </div>
-
-            {/* Small gap between columns and eco zones in portrait */}
-            <div className={`grid grid-cols-5 gap-2 sm:gap-0 justify-items-center w-full mx-0 sm:mx-0 ${windowOrientation === 'landscape' ? 'landscape:mt-1' : 'mt-2 sm:mt-4'} mb-2`}>
-              {gameState.ecoZones.map((zone, index) => (
-                <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
-              ))}
-            </div>
-          </div>
+        {/* EcoZones - fixed 150px height */}
+        <div className="grid grid-cols-5 gap-1 justify-items-center w-full" style={{ height: '150px', marginBottom: '8px' }}>
+          {gameState.ecoZones.map((zone, index) => (
+            <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
+          ))}
         </div>
         
-        {/* Game controls - repositioned in landscape mode, more compact in portrait */}
-        <div className={`flex ${windowOrientation === 'landscape' ? 'landscape:absolute landscape:right-2 landscape:top-1 landscape:flex-col landscape:space-y-1 landscape:space-x-0' : 'justify-center space-x-4 sm:space-x-4'} mt-2 sm:mt-4 pb-1`}>
+        {/* Game controls - fixed 50px height */}
+        <div className="flex justify-center space-x-4" style={{ height: '50px' }}>
           <button
-            className="bg-blue-600 text-white w-[40px] h-[40px] flex items-center justify-center sm:px-4 sm:py-2 rounded-lg text-lg sm:text-base hover:bg-blue-700 shadow-md active:shadow-inner active:translate-y-0.5 transition-all"
+            className="bg-blue-600 text-white w-[40px] h-[40px] flex items-center justify-center rounded-lg text-lg"
             onClick={() => setShowHowToPlay(true)}
           >
             📘
           </button>
           
           <button
-            className="bg-green-600 text-white w-[40px] h-[40px] flex items-center justify-center sm:px-4 sm:py-2 rounded-lg text-lg sm:text-base hover:bg-green-700 shadow-md active:shadow-inner active:translate-y-0.5 transition-all"
+            className="bg-green-600 text-white w-[40px] h-[40px] flex items-center justify-center rounded-lg text-lg"
             onClick={handleNewGame}
           >
             🔄
