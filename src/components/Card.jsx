@@ -83,16 +83,16 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
       {card.faceUp ? (
         <div className="w-full h-full p-0 sm:p-1 relative flex flex-col justify-between">
           {/* Top-left rank */}
-          <div className="absolute top-0 left-0 text-[6px] sm:text-xs md:text-base font-bold">
+          <div className="absolute top-0 left-1 text-[10px] sm:text-xs md:text-base font-bold">
             {card.rank}
           </div>
 
           {/* Center large icon */}
-          <div className="flex-grow flex items-center justify-center">
+          <div className="flex-grow flex items-center justify-center -mt-2 sm:mt-0">
             <img
               src={iconSrc}
               alt={card.class}
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 object-contain"
+              className="w-10 h-10 sm:w-10 sm:h-10 md:w-14 md:h-14 object-contain"
               loading="lazy"
             />
           </div>

@@ -389,31 +389,31 @@ const App = () => {
       <div className="h-full w-full max-w-[1300px] mx-auto px-1 sm:px-4 bg-white/50 rounded-none sm:rounded-xl shadow-lg py-0 sm:py-6 flex flex-col">
         
         {/* Score section - extremely compact in portrait mode */}
-        <div className={`grid ${windowOrientation === 'landscape' ? 'landscape:grid-rows-3 landscape:grid-cols-1 landscape:absolute landscape:left-1 landscape:top-1/2 landscape:transform landscape:-translate-y-1/2 landscape:z-10' : 'grid-cols-3'} items-center mb-0 sm:mb-4 py-0`}>
+        <div className={`grid ${windowOrientation === 'landscape' ? 'landscape:grid-rows-3 landscape:grid-cols-1 landscape:absolute landscape:left-1 landscape:top-1/2 landscape:transform landscape:-translate-y-1/2 landscape:z-10' : 'grid-cols-3'} items-center mb-1 sm:mb-4 py-1 bg-black/20 rounded`}>
           <div className="text-center px-1">
-            <div className="text-sm sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] leading-none">
+            <div className="text-base sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.7)] leading-none">
               {animatedScore}
             </div>
-            <div className="text-[5px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
-              S
+            <div className="text-[8px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+              Score
             </div>
           </div>
           
           <div className="text-center px-1">
-            <div className="text-xs sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+            <div className="text-sm sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
               🏆{highScore}
             </div>
-            <div className="text-[5px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
-              H
+            <div className="text-[8px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+              High
             </div>
           </div>
           
           <div className="text-center px-1">
-            <div className="text-xs sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+            <div className="text-sm sm:text-2xl font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
               {gameState.moves}
             </div>
-            <div className="text-[5px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
-              M
+            <div className="text-[8px] sm:text-sm font-extrabold text-white drop-shadow-[0_3px_3px_rgba(0,0,0,0.7)] leading-none">
+              Moves
             </div>
           </div>
         </div>
@@ -455,16 +455,16 @@ const App = () => {
         </div>
         
         {/* Game controls - repositioned in landscape mode, more compact in portrait */}
-        <div className={`flex ${windowOrientation === 'landscape' ? 'landscape:absolute landscape:right-2 landscape:top-1 landscape:flex-col landscape:space-y-1 landscape:space-x-0' : 'justify-center space-x-4 sm:space-x-4'} mt-0 sm:mt-4 pb-0 h-[29px]`}>
+        <div className={`flex ${windowOrientation === 'landscape' ? 'landscape:absolute landscape:right-2 landscape:top-1 landscape:flex-col landscape:space-y-1 landscape:space-x-0' : 'justify-center space-x-4 sm:space-x-4'} mt-1 sm:mt-4 pb-1 h-[35px]`}>
           <button
-            className="bg-blue-500 text-white px-2 py-0 sm:px-4 sm:py-2 rounded text-sm sm:text-base hover:bg-blue-600 h-full"
+            className="bg-blue-600 text-white px-3 py-1 sm:px-4 sm:py-2 rounded text-base sm:text-base hover:bg-blue-700 h-full shadow-md"
             onClick={() => setShowHowToPlay(true)}
           >
             📘
           </button>
           
           <button
-            className="bg-green-600 text-white px-2 py-0 sm:px-4 sm:py-2 rounded text-sm sm:text-base hover:bg-green-700 h-full"
+            className="bg-green-600 text-white px-3 py-1 sm:px-4 sm:py-2 rounded text-base sm:text-base hover:bg-green-700 h-full shadow-md"
             onClick={handleNewGame}
           >
             🔄
