@@ -42,13 +42,13 @@ const EcoZone = ({ zone, onDropToZone }) => {
   return (
     <div
       ref={drop}
-      className={`w-3 sm:w-16 md:w-24 min-h-[50px] sm:min-h-[200px] md:min-h-[280px] landscape:min-h-[150px] overflow-hidden border-0 sm:border p-0 sm:p-1 md:p-2 rounded-sm sm:rounded flex flex-col items-center 
+      className={`w-3 sm:w-16 md:w-24 min-h-[35px] sm:min-h-[200px] md:min-h-[280px] landscape:min-h-[150px] overflow-hidden border-0 sm:border p-0 sm:p-1 md:p-2 rounded-sm sm:rounded flex flex-col items-center 
         bg-white/20 sm:bg-white/30 backdrop-blur-md shadow-sm sm:shadow-md transition duration-300 ease-in-out
         ${isOver && canDrop ? 'ring-1 sm:ring-4 ring-green-400 animate-pulse' : ''}
         ${!isOver && canDrop ? 'ring-1 sm:ring-2 ring-green-200' : ''}`}
       style={{ outline: '0' }}
     >
-      {/* Class icon header stays fixed */}
+      {/* Class icon header stays fixed - reduced spacing */}
       <img
         src={iconSrc}
         alt={zone.className}
@@ -60,13 +60,13 @@ const EcoZone = ({ zone, onDropToZone }) => {
         }}
       />
 
-      {/* Card Stack container with top margin - reduced in landscape */}
+      {/* Card Stack container with minimal top margin in portrait */}
       <div className="mt-0 sm:mt-8 md:mt-16 landscape:mt-4 relative w-full flex flex-col items-center">
         {zone.cards.length === 0 ? (
-          <div className="text-gray-300 text-[8px] sm:text-sm mt-1 sm:mt-20 landscape:mt-10">-</div>
+          <div className="text-gray-300 text-[8px] sm:text-sm mt-0 sm:mt-20 landscape:mt-10">-</div>
         ) : (
           zone.cards.map((card, i) => (
-            <div key={card.id} className="mb-[-64px] sm:mb-[-60px] landscape:mb-[-50px] relative" style={{ zIndex: i }}>
+            <div key={card.id} className="mb-[-70px] sm:mb-[-60px] landscape:mb-[-50px] relative" style={{ zIndex: i }}>
               <Card card={card} isTop={i === zone.cards.length - 1} />
             </div>
           ))
