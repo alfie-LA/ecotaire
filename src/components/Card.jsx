@@ -52,10 +52,10 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
   const bg = getClassBackground(card.class || card.className);
   const iconSrc = getClassIconPath(card.class || card.className);
 
-  // Adjust sizing for portrait (wider rather than taller) and landscape
+  // Adjust sizing for portrait (must be wider than taller) and landscape
   const cardSizeClasses = orientation === 'landscape' && window.innerHeight < 500
-    ? 'w-3 h-5 sm:w-14 md:w-16 sm:h-16 md:h-20' // Smaller in landscape
-    : 'w-[75px] h-[48px] sm:w-16 md:w-20 sm:h-24 md:h-28'; // Increased width and height for better visibility on mobile
+    ? 'w-12 h-6 sm:w-14 md:w-16 sm:h-16 md:h-20' // Smaller in landscape
+    : 'w-[60px] h-[36px] sm:w-16 md:w-20 sm:h-24 md:h-28'; // Must be wider than tall for portrait mode
 
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'CARD',
@@ -76,7 +76,7 @@ const Card = ({ card, isTop, onClick, shakeCardId }) => {
     <div
       ref={isTop ? drag : null}
       onClick={handleClick}
-      className={`${cardSizeClasses} rounded-md sm:rounded shadow-md sm:shadow-md z-10 relative border border-2 ${border} ${
+      className={`${cardSizeClasses} rounded-md sm:rounded shadow-sm sm:shadow-md z-10 relative border border ${border} ${
         card.faceUp ? `${bg} text-black` : 'bg-gray-700'
       } ${isDragging ? 'opacity-50' : ''} cursor-pointer ${shakeCardId === card.id ? 'animate-shake' : ''}`}
     >

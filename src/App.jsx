@@ -386,7 +386,7 @@ const App = () => {
       className="h-[100svh] w-screen bg-cover bg-center bg-no-repeat overflow-hidden"
       style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}
     >
-      <div className="h-full w-full max-w-[1300px] mx-auto px-2 sm:px-4 bg-white/90 rounded-none sm:rounded-xl shadow-lg py-1 sm:py-6 flex flex-col">
+      <div className="h-full w-full max-w-[1300px] mx-auto px-2 sm:px-4 bg-white/50 rounded-none sm:rounded-xl shadow-lg py-1 sm:py-6 flex flex-col">
         
         {/* Score section - extremely compact in portrait mode */}
         <div className={`grid ${windowOrientation === 'landscape' ? 'landscape:grid-rows-3 landscape:grid-cols-1 landscape:absolute landscape:left-1 landscape:top-1/2 landscape:transform landscape:-translate-y-1/2 landscape:z-10' : 'grid-cols-3'} items-center mb-2 sm:mb-4 py-1 bg-black/30 rounded shadow-md`}>

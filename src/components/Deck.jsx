@@ -37,7 +37,7 @@ const Deck = ({ drawPile, discardPile, onDrawCard, onCardClick, shakeCardId }) =
       {/* Draw Pile - ultra compact height in portrait mobile */}
       <div
         onClick={onDrawCard}
-        className="relative w-[45%] h-[48px] sm:w-14 md:w-20 landscape:w-14 sm:h-24 md:h-28 landscape:h-20 cursor-pointer flex flex-col items-center justify-center bg-white/80 backdrop-blur-md border border-gray-400 rounded-md sm:rounded shadow-md sm:shadow-md hover:ring-2 sm:hover:ring-2 hover:ring-green-400 transition"
+        className="relative w-[45%] h-[48px] sm:w-14 md:w-20 landscape:w-14 sm:h-24 md:h-28 landscape:h-20 cursor-pointer flex flex-col items-center justify-center bg-white/30 backdrop-blur-md border border-gray-400 rounded-md sm:rounded shadow-md sm:shadow-md hover:ring-2 sm:hover:ring-2 hover:ring-green-400 transition"
         title={showRecycle ? 'Recycle' : drawPile.length > 0 ? 'Click to draw' : ''}
       >
         {showRecycle ? (
