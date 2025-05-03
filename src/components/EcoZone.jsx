@@ -43,11 +43,10 @@ const EcoZone = ({ zone, onDropToZone }) => {
   return (
     <div
       ref={drop}
-      className={`w-10 xs:w-3 sm:w-16 md:w-24 min-h-[30px] xs:min-h-[50px] sm:min-h-[200px] md:min-h-[280px] overflow-hidden border-0 sm:border p-0 sm:p-1 md:p-2 rounded-sm sm:rounded flex flex-col items-center 
-        bg-white/20 sm:bg-white/30 backdrop-blur-md shadow-sm sm:shadow-md transition duration-300 ease-in-out
-        \${isOver && canDrop ? 'ring-1 sm:ring-4 ring-green-400 animate-pulse' : ''}
-        \${!isOver && canDrop ? 'ring-1 sm:ring-2 ring-green-200' : ''}`}
-      style={{ outline: '0' }}
+      className={`w-auto min-h-[180px] overflow-hidden border rounded p-1 flex flex-col items-center 
+        bg-white/30 backdrop-blur-md shadow-md transition duration-300 ease-in-out
+        ${isOver && canDrop ? 'ring-4 ring-green-400 animate-pulse' : ''}
+        ${!isOver && canDrop ? 'ring-2 ring-green-200' : ''}`}
     >
       {/* Class icon header stays fixed */}
       <img
