@@ -381,64 +381,67 @@ const App = () => {
   );
 
   // Choose layout based on device and orientation
-  return (
-    <div className="min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden"
-      style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}>
-      <div className="w-full max-w-7xl mx-auto px-1 sm:px-4 bg-white/30 rounded-xl shadow-lg py-2 sm:py-6">
+  // Choose layout based on device orientation
+  return windowOrientation === 'landscape' && isMobile 
+    ? mobileLandscapeLayout 
+    : (
+      <div className="min-h-screen bg-cover bg-center bg-no-repeat overflow-hidden"
+        style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}>
+        <div className="w-full max-w-7xl mx-auto px-1 sm:px-4 bg-white/30 rounded-xl shadow-lg py-2 sm:py-6">
 
-        {/* Simple score header */}
-        <div className="text-center mb-2">
-          <div className="text-lg sm:text-3xl font-bold text-white drop-shadow-lg">
-            Score: {animatedScore} | 🏆 High: {highScore} | Moves: {gameState.moves}
+          {/* Simple score header */}
+          <div className="text-center mb-2">
+            <div className="text-lg sm:text-3xl font-bold text-white drop-shadow-lg">
+              Score: {animatedScore} | 🏆 High: {highScore} | Moves: {gameState.moves}
+            </div>
           </div>
-        </div>
 
-        {/* Deck */}
-        <div className="flex justify-center my-2">
-          <Deck
-            drawPile={gameState.drawPile}
-            discardPile={gameState.discardPile.slice(-3)}
-            onDrawCard={handleDrawCard}
-            onCardClick={handleCardClick}
-          />
-        </div>
-
-        {/* Game Columns - simplified & tight spacing */}
-        <div className="flex justify-center space-x-0.5 w-full mb-2">
-          {gameState.columns.map((columnCards, index) => (
-            <Column
-              key={index}
-              columnIndex={index}
-              cards={columnCards}
-              onCardDrop={(card) => handleDropToColumn(card, index)}
+          {/* Deck */}
+          <div className="flex justify-center my-2">
+            <Deck
+              drawPile={gameState.drawPile}
+              discardPile={gameState.discardPile.slice(-3)}
+              onDrawCard={handleDrawCard}
               onCardClick={handleCardClick}
             />
-          ))}
-        </div>
+          </div>
 
-        {/* EcoZones - simplified & tight spacing */}
-        <div className="flex justify-center space-x-0.5 w-full mb-2">
-          {gameState.ecoZones.map((zone, index) => (
-            <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
-          ))}
-        </div>
+          {/* Game Columns - simplified & tight spacing */}
+          <div className="flex justify-center space-x-0.5 w-full mb-2">
+            {gameState.columns.map((columnCards, index) => (
+              <Column
+                key={index}
+                columnIndex={index}
+                cards={columnCards}
+                onCardDrop={(card) => handleDropToColumn(card, index)}
+                onCardClick={handleCardClick}
+              />
+            ))}
+          </div>
 
-        {/* Simplified buttons */}
-        <div className="flex justify-center gap-2">
-          <button 
-            className="bg-blue-500 text-white px-2 py-1 rounded" 
-            onClick={() => setShowHowToPlay(true)}
-          >
-            📘
-          </button>
-          <button 
-            className="bg-green-600 text-white px-2 py-1 rounded" 
-            onClick={handleNewGame}
-          >
-            🔄
-          </button>
+          {/* EcoZones - simplified & tight spacing */}
+          <div className="flex justify-center space-x-0.5 w-full mb-2">
+            {gameState.ecoZones.map((zone, index) => (
+              <EcoZone key={index} zone={zone} onDropToZone={handleDropToZone} />
+            ))}
+          </div>
+
+          {/* Simplified buttons */}
+          <div className="flex justify-center gap-2">
+            <button 
+              className="bg-blue-500 text-white px-2 py-1 rounded" 
+              onClick={() => setShowHowToPlay(true)}
+            >
+              📘
+            </button>
+            <button 
+              className="bg-green-600 text-white px-2 py-1 rounded" 
+              onClick={handleNewGame}
+            >
+              🔄
+            </button>
+          </div>
         </div>
-      </div>
       
       {showHowToPlay && 
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
