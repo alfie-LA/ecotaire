@@ -443,7 +443,12 @@ const App = () => {
       style={{ backgroundImage: `url('/assets/images/eco-bg.png')` }}
     >
       {/* Fixed layout with no gap - follows mobile-ui-sizing.html specs exactly */}
-      <div className="w-full max-w-[320px] mx-auto px-2 bg-white/50 py-2 flex flex-col" style={{ height: 'auto', minHeight: 'min-content' }}>
+      <div className="w-full max-w-[320px] mx-auto px-2 bg-white/50 py-2 flex flex-col" 
+           style={{ 
+             height: 'auto', 
+             minHeight: 'min-content',
+             marginTop: '20vh' /* Move panel down to align with character's chin */
+           }}
         
         {/* Score section - fixed 40px height */}
         <div className="grid grid-cols-3 items-center bg-black/30 rounded shadow-md" style={{ height: '40px', marginBottom: '8px' }}>
